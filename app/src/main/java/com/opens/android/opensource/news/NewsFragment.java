@@ -82,10 +82,8 @@ public class NewsFragment  extends Fragment{
             {
                 View v = LayoutInflater.from(getActivity()).inflate(
                         R.layout.content_view, null);
-                TextView tv = (TextView) v.findViewById(R.id.tv_content);
                 RecyclerView Recycle=(RecyclerView)v.findViewById(R.id.crime_recycler_view);
                 mPhotoRecyclerView.add(Recycle);
-                tv.setText(str);
                 views.add(v);
             }
             int size = mPhotoRecyclerView.size();
