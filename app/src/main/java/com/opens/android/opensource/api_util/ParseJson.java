@@ -1,11 +1,13 @@
 package com.opens.android.opensource.api_util;
 
+import com.opens.android.opensource.sum.Sum;
 import com.opens.android.opensource.tweet.Tweet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,21 +15,14 @@ import java.util.List;
  */
 
 public class ParseJson {
-    private List<Tweet> tweets;
+
     private JSONObject jsonBody;
 
-    public ParseJson(List<Tweet> tweets, JSONObject jsonBody) {
-        this.tweets = tweets;
+    public ParseJson(JSONObject jsonBody) {
+
         this.jsonBody = jsonBody;
     }
 
-    public List<Tweet> getTweets() {
-        return tweets;
-    }
-
-    public void setTweets(List<Tweet> tweets) {
-        this.tweets = tweets;
-    }
 
     public JSONObject getJsonBody() {
         return jsonBody;
@@ -40,6 +35,7 @@ public class ParseJson {
 
     public List<Tweet> parseTweets() throws JSONException {
 
+        List<Tweet> tweets=new ArrayList<>();
         JSONArray tweetsJsonArray =getJsonBody().getJSONArray("tweetlist");
 
         //取出photo数组中的object，实例一个galleryitem 存起来，填好ID，caption，如果有url,也村上
@@ -56,4 +52,22 @@ public class ParseJson {
         return tweets;
     }
 
+    public List<Sum> parseSumOpenNews() throws JSONException {
+        List<Sum> sumList=new ArrayList<>();
+        JSONArray newsJsonArray =getJsonBody().getJSONArray("newslist");
+
+        for (int i=0;i<newsJsonArray.length();i++){
+            JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);
+            Sum sum=new Sum();
+            sum.setSumAuthorName(newsJsonObject.getString("author"));
+            sum.setSumId(newsJsonObject.getString("id"));
+            sum.setSumTitle(newsJsonObject.getString("title"));
+            sum.setSumType(newsJsonObject.getString("type"));
+            sum.setSumAuthorId(newsJsonObject.getString("authorid"));
+            sum.setSumPubDate(newsJsonObject.getString("pubDate"));
+            sum.setSumCommentCount(newsJsonObject.getString("commentCount"));
+            sumList.add(sum);
+        }
+        return sumList;
+    }
 }

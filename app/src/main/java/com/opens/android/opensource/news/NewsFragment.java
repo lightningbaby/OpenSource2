@@ -92,13 +92,13 @@ public class NewsFragment  extends Fragment{
                 recy.setLayoutManager(new LinearLayoutManager(getActivity()));
                 switch(i){
                     case 0:
-                        new NewItemOne(recy,getActivity(),NewsFragment.this,"00");//the latest tweets
+                        new NewItemOne(recy,getActivity(),NewsFragment.this,"10");//the latest tweets
                         break;
                     case 1:
-                        new NewItemOne(recy,getActivity(),NewsFragment.this,"01");//the hot tweets
+                        new NewItemOne(recy,getActivity(),NewsFragment.this,"11");//the hot tweets
                         break;
                     case 2:
-                        new NewItemOne(recy,getActivity(),NewsFragment.this,"02");//oschina's tweets
+                        new NewItemOne(recy,getActivity(),NewsFragment.this,"12");//oschina's tweets
                         break;
                 }
 

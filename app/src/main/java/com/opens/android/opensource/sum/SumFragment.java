@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.opens.android.opensource.R;
-import com.opens.android.opensource.news.NewItemOne;
-import com.opens.android.opensource.news.NewsFragment;
 import com.opens.android.opensource.topbar.BaseAdapter;
 import com.opens.android.opensource.topbar.HorizontalScrollMenu;
 
@@ -40,11 +38,11 @@ public class SumFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.sum_list_item,container,false);
+        View v=inflater.inflate(R.layout.fragment_news,container,false);
         hsm_container = (HorizontalScrollMenu) v.findViewById(R.id.hsm_container);
         hsm_container.setSwiped(true);
-        hsm_container.setAdapter(new SumFragment.MenuAdapter());
-        Log.v("news","*****************");
+        hsm_container.setAdapter(new MenuAdapter());
+        Log.v("sum","*****************");
         return v;
     }
 
@@ -75,13 +73,13 @@ public class SumFragment extends Fragment {
                 recy.setLayoutManager(new LinearLayoutManager(getActivity()));
                 switch(i){
                     case 0:
-                        new SumItem(recy,getActivity(),SumFragment.this,"00");//the latest tweets
+                        new SumItem(recy,getActivity(),SumFragment.this,"00");//
                         break;
                     case 1:
-                        new SumItem(recy,getActivity(),SumFragment.this,"01");//the hot tweets
+                        new SumItem(recy,getActivity(),SumFragment.this,"01");//
                         break;
                     case 2:
-                        new SumItem(recy,getActivity(),SumFragment.this,"02");//oschina's tweets
+                        new SumItem(recy,getActivity(),SumFragment.this,"02");//
                         break;
                 }
             }

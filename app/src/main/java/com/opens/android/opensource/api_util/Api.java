@@ -12,17 +12,33 @@ public class Api {
     public Api() {
     }
 
+    /**
+     * @return 综合模块--开源咨询--列表--不包含摘要
+     */
+    public String getOpenNewsApi( ){
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/news_list")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("catalog", "1")
+                .appendQueryParameter("page/pageIndex", "1")
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
     public String getTweetListApi(String tweetType){
         String user="0";//default the latest
 
         switch (tweetType){
-            case "00"://latest
+            case "10"://latest
                 user="0";
                 break;
-            case "01"://hot
+            case "11"://hot
                 user="-1";
                 break;
-            case "02"://oschina
+            case "12"://oschina
                 user="1";
                 break;
         }
@@ -37,6 +53,7 @@ public class Api {
                 .build().toString();
         return url;
     }
+
 
 
 

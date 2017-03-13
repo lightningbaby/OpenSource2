@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.opens.android.opensource.R;
 import com.opens.android.opensource.api_util.JudgeType;
 import com.opens.android.opensource.fetchsource.ThumbnailDownloader;
 
@@ -34,48 +35,48 @@ public class SumItem {
     private RecyclerView mPhotoRecyclerView;
     private static final String TAG="SumItem";
     private List<Sum> mItems = new ArrayList<>();
-    private ThumbnailDownloader<SumItem.PhotoHolder> mPhotoHolderThumbnailDownloader;
+//    private ThumbnailDownloader<SumItem.PhotoHolder> mPhotoHolderThumbnailDownloader;
     private Context mContext;
     private Fragment mFragment;
-    private String mString;
+    private String bigType;//决定是综合中的哪一块
 
     public SumItem(RecyclerView mRcycle, Context context, Fragment fragment,String str) {
         mPhotoRecyclerView=mRcycle;
         mContext=context;
         mFragment=fragment;
-        mString=str;
+        bigType=str;
 
         new FetchItemsTask().execute();
 
-        Handler responseHandler=new Handler();
-        mPhotoHolderThumbnailDownloader=new ThumbnailDownloader<>(responseHandler);
-        mPhotoHolderThumbnailDownloader.setThumbnailDownloadListener(
-                new ThumbnailDownloader.ThumbnailDownloadListener<NewItemOne.PhotoHolder>() {
-                    @Override
-                    public void onThumbnailDownloaded(NewItemOne.PhotoHolder photoHolder, Bitmap thumbnail) {
-                        Drawable drawable=new BitmapDrawable(mFragment.getResources(),thumbnail);
-//                        photoHolder.bindDrawable(drawable);//因为没有图片
-                    }
-                }
-        );
-        mPhotoHolderThumbnailDownloader.start();
-        mPhotoHolderThumbnailDownloader.getLooper();
-        Log.i(TAG,"Background thread started");
+//        Handler responseHandler=new Handler();
+//        mPhotoHolderThumbnailDownloader=new ThumbnailDownloader<>(responseHandler);
+//        mPhotoHolderThumbnailDownloader.setThumbnailDownloadListener(
+//                new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
+//                    @Override
+//                    public void onThumbnailDownloaded(PhotoHolder photoHolder, Bitmap thumbnail) {
+//                        Drawable drawable=new BitmapDrawable(mFragment.getResources(),thumbnail);
+////                        photoHolder.bindDrawable(drawable);//因为没有图片
+//                    }
+//                }
+//        );
+//        mPhotoHolderThumbnailDownloader.start();
+//        mPhotoHolderThumbnailDownloader.getLooper();
+//        Log.i(TAG,"Background thread started");
 
         mPhotoRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         setupAdapter();
     }
 
-    public void Destroy() {
-        mPhotoHolderThumbnailDownloader.clearQueue();
-        mPhotoHolderThumbnailDownloader.quit();
-        Log.i(TAG,"Backeground thread destroyed");
-    }
+//    public void Destroy() {
+//        mPhotoHolderThumbnailDownloader.clearQueue();
+//        mPhotoHolderThumbnailDownloader.quit();
+//        Log.i(TAG,"Backeground thread destroyed");
+//    }
 
     private class FetchItemsTask extends AsyncTask<Void,Void,List<Sum>> {
         @Override
         protected List<Sum> doInBackground(Void... voids) {
-            JudgeType judgeType=new JudgeType(mString);
+            JudgeType judgeType=new JudgeType(bigType);
             List<Sum>  item= null;
             try {
                 item =  (List<Sum>)judgeType.JudgeAndRet();
@@ -107,6 +108,10 @@ public class SumItem {
         public PhotoHolder(View itemView) {
             super(itemView);
             mTitleTextView=(TextView)itemView.findViewById(R.id.title_text_view);
+            mAbstractTextView= (TextView) itemView.findViewById(R.id.abstract_text_view);
+            mAuthorTextView= (TextView) itemView.findViewById(R.id.author_text_view);
+            mDateTextView= (TextView) itemView.findViewById(R.id.date_text_view);
+            mCommentTextView= (TextView) itemView.findViewById(R.id.comment_text_view);
         }
 
         public void bindDrawable(Drawable drawable) {
@@ -114,7 +119,11 @@ public class SumItem {
 
         }
         public void bindSumOthers(Sum sum){
-          mTitleTextView.setText(sum.getSumTitle().toString());
+
+            mTitleTextView.setText(sum.getSumTitle().toString());
+            mAuthorTextView.setText("@"+sum.getSumAuthorName().toString());
+            mDateTextView.setText(sum.getSumPubDate().toString());
+            mCommentTextView.setText("评论"+sum.getSumCommentCount().toString());
         }
 
     }
