@@ -97,6 +97,7 @@ public class NewsFragment  extends Fragment{
                         new NewItemOne(recy,getActivity(),NewsFragment.this);
                         break;
                     case 1:
+                        new NewItemOne(recy,getActivity(),NewsFragment.this);
                         break;
                     case 3:
                         break;

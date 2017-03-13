@@ -17,10 +17,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.opens.android.opensource.R;
+import com.opens.android.opensource.api_util.JudgeType;
 import com.opens.android.opensource.fetchsource.ThumbnailDownloader;
 import com.opens.android.opensource.tweet.Tweet;
 import com.opens.android.opensource.tweet.TweetFetch;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +48,7 @@ public class NewItemOne {
         mFragment=fragment;
 
         new FetchItemsTask().execute();
+
         Handler responseHandler=new Handler();
         mPhotoHolderThumbnailDownloader=new ThumbnailDownloader<>(responseHandler);
         mPhotoHolderThumbnailDownloader.setThumbnailDownloadListener(
@@ -77,8 +82,18 @@ public class NewItemOne {
     private class FetchItemsTask extends AsyncTask<Void,Void,List<Tweet>> {
         @Override
         protected List<Tweet> doInBackground(Void... voids) {
+            JudgeType judgeType=new JudgeType("00");
+            List<Tweet>  item= null;
+            try {
+                item =  (List<Tweet>)judgeType.JudgeAndRet();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 //
-            return new TweetFetch().fetchItems();
+
+            return item;
         }
 
         /**
