@@ -9,6 +9,7 @@ import android.util.Log;
 import com.opens.android.opensource.discover.DiscoverFragment;
 import com.opens.android.opensource.mine.MineFragment;
 import com.opens.android.opensource.news.NewsFragment;
+import com.opens.android.opensource.sum.SumFragment;
 import com.opens.android.opensource.tweet.TweetFragment;
 
 public class MainActivity extends AppCompatActivity implements ButtomBarFragment.Callbacks{
@@ -31,10 +32,10 @@ public class MainActivity extends AppCompatActivity implements ButtomBarFragment
         Fragment newFragment;
         switch (num){
             case 0:
-                newFragment=new NewsFragment();
+                newFragment=new SumFragment();//综合
                 break;
             case 1:
-                newFragment=new TweetFragment();
+                newFragment=new NewsFragment();//动弹
                 break;
             case 2:
                 newFragment =new DiscoverFragment();

@@ -12,16 +12,32 @@ public class Api {
     public Api() {
     }
 
-    public String getTweetListApi(){
+    public String getTweetListApi(String tweetType){
+        String user="0";//default the latest
+
+        switch (tweetType){
+            case "00"://latest
+                user="0";
+                break;
+            case "01"://hot
+                user="-1";
+                break;
+            case "02"://oschina
+                user="1";
+                break;
+        }
+
         String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_list")
                 .buildUpon()
                 .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("user", user)
                 .appendQueryParameter("pageSize", "20")
                 .appendQueryParameter("page/pageIndex", "1")
                 .appendQueryParameter("dataType", "json")
                 .build().toString();
         return url;
-
     }
+
+
 
 }

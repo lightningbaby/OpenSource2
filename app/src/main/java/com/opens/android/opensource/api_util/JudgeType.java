@@ -38,21 +38,26 @@ public class JudgeType {
 
     public List<?> JudgeAndRet() throws IOException, JSONException {
         Api api=new Api();
+        JSONObject jsonBody=new JSONObject();
 
         switch (getType()){
-            case "00":
+            case "00"://the latest
                 Log.d(LATEST_TWEET,"latest tweet");
-                JSONObject jsonBody=new FetchJson(api.getTweetListApi()).getUrlString();
+                jsonBody=new FetchJson(api.getTweetListApi(getType())).getUrlString();
+
+            case "01"://the hot
+                Log.d(HOT_TWEET,"hot tweet");
+                jsonBody=new FetchJson(api.getTweetListApi(getType())).getUrlString();
+
+            case "02"://oschina
+                Log.d(MY_TWEET,"hot tweet");
+                jsonBody=new FetchJson(api.getTweetListApi(getType())).getUrlString();
+
+            default:
                 List<Tweet> mTweets = new ArrayList<>();
                 return new ParseJson(mTweets,jsonBody).parseTweets();
-            case "01":
-                Log.d(HOT_TWEET,"hot tweet");
-                break;
-            case "02":
-                Log.d(MY_TWEET,"my tweet");
-                break;
         }
-        return null;
+
     }
 }
 

@@ -40,12 +40,15 @@ public class NewItemOne {
     private ThumbnailDownloader<PhotoHolder> mPhotoHolderThumbnailDownloader;
     private Context mContext;
     private Fragment mFragment;
+    private String mString;
 
 
-    public NewItemOne(RecyclerView mRcycle, Context context, Fragment fragment){
+    public NewItemOne(RecyclerView mRcycle, Context context, Fragment fragment,String str){
         mPhotoRecyclerView=mRcycle;
         mContext=context;
         mFragment=fragment;
+        mString=str;
+
 
         new FetchItemsTask().execute();
 
@@ -82,7 +85,7 @@ public class NewItemOne {
     private class FetchItemsTask extends AsyncTask<Void,Void,List<Tweet>> {
         @Override
         protected List<Tweet> doInBackground(Void... voids) {
-            JudgeType judgeType=new JudgeType("00");
+            JudgeType judgeType=new JudgeType(mString);
             List<Tweet>  item= null;
             try {
                 item =  (List<Tweet>)judgeType.JudgeAndRet();
