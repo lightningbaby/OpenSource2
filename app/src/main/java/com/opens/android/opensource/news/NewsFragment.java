@@ -37,6 +37,7 @@ import java.util.List;
 
 public class NewsFragment  extends Fragment{
     private HorizontalScrollMenu hsm_container;
+
     private List<RecyclerView> mPhotoRecyclerView=new ArrayList<RecyclerView>();
     private static final String TAG="TweetFetchFragment";
 
