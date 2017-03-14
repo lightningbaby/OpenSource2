@@ -1,5 +1,6 @@
 package com.opens.android.opensource;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import com.opens.android.opensource.discover.DiscoverFragment;
 import com.opens.android.opensource.mine.MineFragment;
 import com.opens.android.opensource.news.NewsFragment;
 import com.opens.android.opensource.sum.SumFragment;
+import com.opens.android.opensource.tweet.AddTweetActivity;
 import com.opens.android.opensource.tweet.TweetFragment;
 
 public class MainActivity extends AppCompatActivity implements ButtomBarFragment.Callbacks{
@@ -47,7 +49,9 @@ public class MainActivity extends AppCompatActivity implements ButtomBarFragment
             case 3:
                 newFragment = new MineFragment();
                 break;
-
+            case 4:
+                Intent intent=new Intent(MainActivity.this, AddTweetActivity.class);
+                startActivity(intent);
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container_top, newFragment)

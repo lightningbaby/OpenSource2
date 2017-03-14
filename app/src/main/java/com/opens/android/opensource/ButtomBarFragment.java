@@ -19,6 +19,7 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
     private RelativeLayout discover_layout;
     private RelativeLayout tweet_layout;
     private RelativeLayout my_layout;
+    private RelativeLayout add_layout;
 
   //  private Enum NEWS,TWEET,DISCOVER,MINE;
 
@@ -47,11 +48,13 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
         tweet_layout = (RelativeLayout) v.findViewById(R.id.tweet_layout);
         discover_layout = (RelativeLayout) v.findViewById(R.id.discover_layout);
         my_layout = (RelativeLayout) v.findViewById(R.id.my_layout);
+        add_layout=(RelativeLayout)v.findViewById(R.id.add_layout);
 
         news_layout.setOnClickListener(this);
         tweet_layout.setOnClickListener(this);
         discover_layout.setOnClickListener(this);
         my_layout.setOnClickListener(this);
+        add_layout.setOnClickListener(this);
 
         return v;
     }
@@ -73,6 +76,9 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.my_layout:
                 position = 3;
+                break;
+            case R.id.add_layout:
+                position=4;
                 break;
             default:
                 position = 0;

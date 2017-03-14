@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/add_edit"
+              android:layout_width="match_parent"
+          android:inputType="textMultiLine"
+          android:hint="发表动弹..."
+          android:padding="10dp"
+          android:textCursorDrawable="@drawable/edit_cursor"
+          android:background="@drawable/edit_shape"
+          android:gravity="top"
+          android:imeOptions="flagNoExtractUi"
+          android:layout_height="match_parent">
+
+</EditText>

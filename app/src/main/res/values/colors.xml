@@ -3,4 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="gray_dedede">#DEDEDE</color>
+    <color name="gray_2f2e35">#2f2e35</color>
+    <color name="green_24cf5f">#24cf5f</color>
+    <color name="white">#ffffff</color>
+    <color name="black_1000000000">#10000000</color>
+    <color name="trans">#00000000</color>
+    <color name="user_info_message_notice">#E35B5A</color>
+    <color name="white_bg_press">#ebebeb</color>
+    <color name="black">#000000</color>
 </resources>
