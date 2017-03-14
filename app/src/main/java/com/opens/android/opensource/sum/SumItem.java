@@ -125,7 +125,8 @@ public class SumItem {
             mTitleTextView.setText(sum.getSumTitle().toString());
             mAuthorTextView.setText("@"+sum.getSumAuthorName().toString());
             mDateTextView.setText(sum.getSumPubDate().toString());
-            mCommentTextView.setText("评论"+sum.getSumCommentCount().toString());
+            mCommentTextView.setText("评论 "+sum.getSumCommentCount().toString());
+            mAbstractTextView.setText(sum.getSumBody().toString());
         }
 
     }

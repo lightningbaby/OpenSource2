@@ -6,6 +6,11 @@ import com.opens.android.opensource.tweet.Tweet;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,17 +82,26 @@ public class ParseJson {
     }
 
     /**
-     * @param sumList
+     * @param
      * @return  根据开源资讯列表的ID--获取某一条的body---将body填充到Sum中
      * @throws JSONException
      */
-    public List<Sum> parseSumOpenNews(List<Sum> sumList) throws JSONException {
+    public Sum parseSumOpenNewsBody(Sum sum) throws JSONException {
 
-        for(int i=0;i<sumList.size();i++){
-            Sum sum=sumList.get(i);
-            sum.setSumBody(getJsonBody().getString("body"));
+//        for(int i=0;i<sumList.size();i++){
+//            Sum sum=sumList.get(i);
+//            sum.setSumBody(getJsonBody().getString("body"));
+//        }
+//        return sumList;
+
+        Document document=  Jsoup.parse(getJsonBody().getString("body"));
+        Elements elements=  document.getElementsByTag("p");
+        String body="";
+        for(Element e:elements){
+            body +=e.text();
         }
-        return sumList;
+        sum.setSumBody(body);
+        return sum;
     }
 
 
