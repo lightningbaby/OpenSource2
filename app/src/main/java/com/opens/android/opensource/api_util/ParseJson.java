@@ -1,5 +1,6 @@
 package com.opens.android.opensource.api_util;
 
+import com.opens.android.opensource.discover.Software;
 import com.opens.android.opensource.sum.Sum;
 import com.opens.android.opensource.tweet.Tweet;
 
@@ -128,4 +129,47 @@ public class ParseJson {
         }
         return sumList;
     }
+    /**
+     * @return  开源——软件分类
+     * @throws JSONException
+     */
+    public List<Software> parseKindSoftwares() throws JSONException {
+
+        List<Software> softwareList=new ArrayList<>();
+        JSONArray newsJsonArray =getJsonBody().getJSONArray("softwareTypes");
+
+        for (int i=0;i<newsJsonArray.length();i++){
+            JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);
+            Software software=new Software();
+            software.setName(newsJsonObject.getString("name"));
+            software.setTag(newsJsonObject.getString("tag"));
+            softwareList.add(software);
+        }
+        return softwareList;
+    }
+
+
+    /**
+     * @return  开源——软件分类-- 推荐 最新 热门 国产
+     * @throws JSONException
+     */
+    public List<Software> parseItemSoftwares() throws JSONException {
+
+        List<Software> softwareList=new ArrayList<>();
+        JSONArray newsJsonArray =getJsonBody().getJSONArray("projectlist");
+
+        for (int i=0;i<newsJsonArray.length();i++){
+            JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);
+            Software software=new Software();
+            software.setName(newsJsonObject.getString("name"));
+            software.setDescription(newsJsonObject.getString("description"));
+            software.setUrl(newsJsonObject.getString("url"));
+            softwareList.add(software);
+        }
+        return softwareList;
+    }
+
+
+
+
 }

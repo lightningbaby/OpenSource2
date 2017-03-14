@@ -63,7 +63,7 @@ public class NewsFragment  extends Fragment{
     class MenuAdapter extends BaseAdapter
     {
         String[] names = new String[]
-                { "菜单一", "菜单二", "菜单三", "菜单四", "菜单五", "菜单六", "菜单七","菜单八" };
+                { "最新动弹", "热门动弹", "官方动弹" };
 
         @Override
         public List<String> getMenuItems()

@@ -111,6 +111,50 @@ public class Api {
     }
 
 
+    public String getSoftwareListApi(String softwareType){
+        String type="";//default the latest
+        String url;
+
+        if("30".equals(softwareType)){
+                url= Uri.parse("https://www.oschina.net/action/openapi/project_catalog_list")
+                        .buildUpon()
+                        .appendQueryParameter("access_token",ACCESS_TOKEN)
+                        .appendQueryParameter("tag", "0")
+                        .appendQueryParameter("dataType", "json")
+                        .build().toString();
+            return url;
+        }
+      //  https://www.oschina.net/action/openapi/project_catalog_list/?access_token=f146017c-d4b3-4be3-9bdf-9d74650b61fe&tag=0&dataType=json
+
+        switch (softwareType){
+            case "31"://latest
+                type="recommend";
+                break;
+            case "32"://hot
+                type="time";
+                break;
+            case "33"://oschina
+                type="view";
+                break;
+            case "34":
+                type="cn";
+                break;
+        }
+        url= Uri.parse("https://www.oschina.net/action/openapi/project_list")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("type", type)
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+
+    }
+
+//  https://www.oschina.net/action/openapi/project_list?access_token=f146017c-d4b3-4be3-9bdf-9d74650b61fe&type=recommend&dataType=json
+//    https://www.oschina.net/action/openapi/project_list?access_token=f146017c-d4b3-4be3-9bdf-9d74650b61fe&type=time&dataType=json
+//    https://www.oschina.net/action/openapi/project_list?access_token=f146017c-d4b3-4be3-9bdf-9d74650b61fe&type=view&dataType=json
+//    https://www.oschina.net/action/openapi/project_list?access_token=f146017c-d4b3-4be3-9bdf-9d74650b61fe&type=cn&dataType=json
+
 
 
 }
