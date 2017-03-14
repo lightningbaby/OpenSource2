@@ -25,7 +25,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         mShakeLayout=(LinearLayout)v.findViewById(R.id.my_shake);
         mShakeLayout.setOnClickListener(this);
 
-        //mTextView=(TextView)v.findViewById(R.id.text1);
+        //      mTextView=(TextView)v.findViewById(R.id.text1);
         //mTextView.setText("摇一摇");
         /*
         mTextView.setOnClickListener(new View.OnClickListener() {
