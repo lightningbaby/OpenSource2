@@ -22,7 +22,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_mine,container,false);
-        mShakeLayout=(LinearLayout)v.findViewById(R.id.rl_info_shake);
+        mShakeLayout=(LinearLayout)v.findViewById(R.id.my_shake);
         mShakeLayout.setOnClickListener(this);
 
         //mTextView=(TextView)v.findViewById(R.id.text1);
@@ -41,7 +41,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v){
         switch (v.getId()){
-            case R.id.rl_info_shake:
+            case R.id.my_shake:
                 Intent intent=new Intent(getActivity(), ShakeActivity.class);
                 startActivity(intent);
         }

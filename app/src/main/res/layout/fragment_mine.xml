@@ -137,7 +137,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/ly_tweet"
+                android:id="@+id/my_tweet"
                 style="@style/new_user_information_counts"
                 android:gravity="center">
 
@@ -161,7 +161,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ly_favorite"
+                android:id="@+id/my_favorite"
                 style="@style/new_user_information_counts"
                 android:gravity="center">
 
@@ -185,7 +185,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ly_following"
+                android:id="@+id/my_following"
                 style="@style/new_user_information_counts"
                 android:gravity="center">
 
@@ -209,7 +209,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ly_follower"
+                android:id="@+id/my_fans"
                 style="@style/new_user_information_counts"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -287,7 +287,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/rl_message"
+                        android:id="@+id/my_message"
                         style="@style/option_item_rl">
 
                         <ImageView
@@ -349,7 +349,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/rl_blog"
+                        android:id="@+id/my_blog"
                         style="@style/option_item_rl">
 
                         <ImageView
@@ -388,7 +388,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/rl_info_question"
+                        android:id="@+id/my_question"
                         style="@style/option_item_rl">
 
                         <ImageView
@@ -428,7 +428,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/rl_info_shake"
+                        android:id="@+id/my_shake"
                         style="@style/option_item_rl">
 
                         <ImageView
