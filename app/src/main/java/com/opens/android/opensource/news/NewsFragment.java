@@ -101,8 +101,6 @@ public class NewsFragment  extends Fragment{
                         new NewItemOne(recy,getActivity(),NewsFragment.this,"12");//oschina's tweets
                         break;
                 }
-
-
             }
             return views;
         }

@@ -52,9 +52,53 @@ public class ParseJson {
         return tweets;
     }
 
+    /**
+     * @return  综合--开源资讯
+     * @throws JSONException
+     */
     public List<Sum> parseSumOpenNews() throws JSONException {
+
         List<Sum> sumList=new ArrayList<>();
         JSONArray newsJsonArray =getJsonBody().getJSONArray("newslist");
+
+        for (int i=0;i<newsJsonArray.length();i++){
+            JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);
+            Sum sum=new Sum();
+            sum.setSumAuthorName(newsJsonObject.getString("author"));
+            sum.setSumId(newsJsonObject.getString("id"));
+            sum.setSumTitle(newsJsonObject.getString("title"));
+            sum.setSumType(newsJsonObject.getString("type"));
+            sum.setSumAuthorId(newsJsonObject.getString("authorid"));
+            sum.setSumPubDate(newsJsonObject.getString("pubDate"));
+            sum.setSumCommentCount(newsJsonObject.getString("commentCount"));
+            sumList.add(sum);
+        }
+        return sumList;
+    }
+
+    /**
+     * @param sumList
+     * @return  根据开源资讯列表的ID--获取某一条的body---将body填充到Sum中
+     * @throws JSONException
+     */
+    public List<Sum> parseSumOpenNews(List<Sum> sumList) throws JSONException {
+
+        for(int i=0;i<sumList.size();i++){
+            Sum sum=sumList.get(i);
+            sum.setSumBody(getJsonBody().getString("body"));
+        }
+        return sumList;
+    }
+
+
+    /**
+     * @return  z综合--推荐博客
+     * @throws JSONException
+     */
+    public List<Sum> parseSumRecommndBlog() throws JSONException {
+
+        List<Sum> sumList=new ArrayList<>();
+        JSONArray newsJsonArray =getJsonBody().getJSONArray("bloglist");
 
         for (int i=0;i<newsJsonArray.length();i++){
             JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);

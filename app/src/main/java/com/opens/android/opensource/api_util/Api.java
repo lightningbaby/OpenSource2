@@ -8,7 +8,7 @@ import android.net.Uri;
 
 public class Api {
     private static final String TAG = "Api";
-    private static final String ACCESS_TOKEN = "74dbedca-3933-4597-902a-3c39ddd6910f";
+    private static final String ACCESS_TOKEN = "f146017c-d4b3-4be3-9bdf-9d74650b61fe";
     public Api() {
     }
 
@@ -23,6 +23,62 @@ public class Api {
                 .appendQueryParameter("catalog", "1")
                 .appendQueryParameter("page/pageIndex", "1")
                 .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
+    public String getOpenNewsDetailApi(String SumId){
+        String url= Uri.parse("https://www.oschina.net/action/openapi/news_detail")
+                .buildUpon()
+                .appendQueryParameter("id", SumId)
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
+    /**
+     * @return  综合模块--推荐博客
+     */
+    public String getRecommndBlog(){
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/blog_recommend_list")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("page/pageIndex", "1")
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
+    /**
+     * @return综合模块--技术问答
+     */
+    public String getTechQA(){
+        String url= Uri.parse("https://www.oschina.net/action/openapi/post_list")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("catalog", "1")
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("page/pageIndex", "1")
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
+    /**
+     * @return 综合模块--职业生涯
+     */
+    public String getJobCareer(){
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/post_list")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("catalog", "100")
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("page/pageIndex", "1")
                 .appendQueryParameter("dataType", "json")
                 .build().toString();
         return url;

@@ -13,6 +13,7 @@ import com.opens.android.opensource.sum.SumFragment;
 import com.opens.android.opensource.tweet.TweetFragment;
 
 public class MainActivity extends AppCompatActivity implements ButtomBarFragment.Callbacks{
+    Fragment newFragment ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,13 @@ public class MainActivity extends AppCompatActivity implements ButtomBarFragment
                     .add(R.id.container_bottombar, fragment)
                     .commit();
         }
+        newFragment = new SumFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container_top, newFragment)
+                .commit();
     }
     @Override
     public void onItemSelected(int num) {
-        Fragment newFragment;
         switch (num){
             case 0:
                 newFragment=new SumFragment();//综合
@@ -43,8 +47,7 @@ public class MainActivity extends AppCompatActivity implements ButtomBarFragment
             case 3:
                 newFragment = new MineFragment();
                 break;
-            default:
-                newFragment=new NewsFragment();
+
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container_top, newFragment)

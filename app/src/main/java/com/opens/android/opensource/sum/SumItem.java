@@ -35,7 +35,7 @@ public class SumItem {
     private RecyclerView mPhotoRecyclerView;
     private static final String TAG="SumItem";
     private List<Sum> mItems = new ArrayList<>();
-//    private ThumbnailDownloader<SumItem.PhotoHolder> mPhotoHolderThumbnailDownloader;
+    private ThumbnailDownloader<SumItem.PhotoHolder> mPhotoHolderThumbnailDownloader;
     private Context mContext;
     private Fragment mFragment;
     private String bigType;//决定是综合中的哪一块
@@ -48,43 +48,44 @@ public class SumItem {
 
         new FetchItemsTask().execute();
 
-//        Handler responseHandler=new Handler();
-//        mPhotoHolderThumbnailDownloader=new ThumbnailDownloader<>(responseHandler);
-//        mPhotoHolderThumbnailDownloader.setThumbnailDownloadListener(
-//                new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
-//                    @Override
-//                    public void onThumbnailDownloaded(PhotoHolder photoHolder, Bitmap thumbnail) {
-//                        Drawable drawable=new BitmapDrawable(mFragment.getResources(),thumbnail);
-////                        photoHolder.bindDrawable(drawable);//因为没有图片
-//                    }
-//                }
-//        );
-//        mPhotoHolderThumbnailDownloader.start();
-//        mPhotoHolderThumbnailDownloader.getLooper();
-//        Log.i(TAG,"Background thread started");
+
+        Handler responseHandler=new Handler();
+        mPhotoHolderThumbnailDownloader=new ThumbnailDownloader<>(responseHandler);
+        mPhotoHolderThumbnailDownloader.setThumbnailDownloadListener(
+                new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
+                    @Override
+                    public void onThumbnailDownloaded(PhotoHolder photoHolder, Bitmap thumbnail) {
+                        Drawable drawable=new BitmapDrawable(mFragment.getResources(),thumbnail);
+//                        photoHolder.bindDrawable(drawable);//因为没有图片
+                    }
+                }
+        );
+        mPhotoHolderThumbnailDownloader.start();
+        mPhotoHolderThumbnailDownloader.getLooper();
+        Log.i(TAG,"Background thread started");
 
         mPhotoRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        setupAdapter();
+       //setupAdapter();
     }
 
-//    public void Destroy() {
-//        mPhotoHolderThumbnailDownloader.clearQueue();
-//        mPhotoHolderThumbnailDownloader.quit();
-//        Log.i(TAG,"Backeground thread destroyed");
-//    }
+    public void Destroy() {
+        mPhotoHolderThumbnailDownloader.clearQueue();
+        mPhotoHolderThumbnailDownloader.quit();
+        Log.i(TAG,"Backeground thread destroyed");
+    }
 
     private class FetchItemsTask extends AsyncTask<Void,Void,List<Sum>> {
         @Override
         protected List<Sum> doInBackground(Void... voids) {
             JudgeType judgeType=new JudgeType(bigType);
-            List<Sum>  item= null;
+            List<Sum>  item= new ArrayList<>();
             try {
                 item =  (List<Sum>)judgeType.JudgeAndRet();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
+             }
             return item;
         }
 
@@ -104,6 +105,7 @@ public class SumItem {
         private TextView mAuthorTextView;
         private TextView mDateTextView;
         private TextView mCommentTextView;
+        private ImageView mImageView;
 
         public PhotoHolder(View itemView) {
             super(itemView);
@@ -115,7 +117,7 @@ public class SumItem {
         }
 
         public void bindDrawable(Drawable drawable) {
-//            mTweetPortraitImageView.setImageDrawable(drawable);
+//          mTweetPortraitImageView.setImageDrawable(drawable);
 
         }
         public void bindSumOthers(Sum sum){
@@ -129,7 +131,7 @@ public class SumItem {
     }
 
     private class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder>{
-        private List<Sum> mSumList;
+        private List<Sum> mSumList = new ArrayList<>();
 
         public PhotoAdapter(List<Sum> sumList) {
             mSumList = sumList;
@@ -145,6 +147,8 @@ public class SumItem {
         @Override
         public void onBindViewHolder(PhotoHolder holder, int position) {
            Sum sum=mSumList.get(position);
+//            String url="https://static.oschina.net/uploads/user/0/1_50.jpg?t=1389148177000";
+//            mPhotoHolderThumbnailDownloader.queueThumbanail(holder,url);
            holder.bindSumOthers(sum);
         }
 
@@ -157,5 +161,6 @@ public class SumItem {
         if(mFragment.isAdded()){
             mPhotoRecyclerView.setAdapter(new PhotoAdapter(mItems));
         }
+        //mPhotoRecyclerView.setAdapter(new PhotoAdapter(mItems));
     }
 }

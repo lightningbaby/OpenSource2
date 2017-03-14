@@ -86,7 +86,7 @@ public class NewItemOne {
         @Override
         protected List<Tweet> doInBackground(Void... voids) {
             JudgeType judgeType=new JudgeType(mString);
-            List<Tweet>  item= null;
+            List<Tweet>  item= new ArrayList<>();
             try {
                 item =  (List<Tweet>)judgeType.JudgeAndRet();
             } catch (IOException e) {
@@ -94,8 +94,6 @@ public class NewItemOne {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//
-
             return item;
         }
 
@@ -120,8 +118,7 @@ public class NewItemOne {
 
         public PhotoHolder(View itemView) {
             super(itemView);
-            mTweetPortraitImageView = (ImageView) itemView
-                    .findViewById(R.id.head);
+            mTweetPortraitImageView = (ImageView) itemView.findViewById(R.id.head);
             mAuthorTextView= (TextView) itemView.findViewById(R.id.usr_id);
             mTweetBodyTextView= (TextView) itemView.findViewById(R.id.title);
             mTweetTimeView=(TextView)itemView.findViewById(R.id.time);

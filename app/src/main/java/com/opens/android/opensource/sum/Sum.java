@@ -4,7 +4,8 @@ package com.opens.android.opensource.sum;
  * Created by ttc on 2017/3/13.
  */
 
-public class Sum {
+public class Sum {//综合---开源资讯和推荐博客
+
     private String mSumAuthorName;
     private String mSumId;
     private String mSumTitle;
@@ -12,8 +13,18 @@ public class Sum {
     private String mSumType;
     private String mSumPubDate;
     private String mSumCommentCount;
+    private String mSumBody;
+
+    public String getSumBody() {
+        return mSumBody;
+    }
+
+    public void setSumBody(String sumBody) {
+        mSumBody = sumBody;
+    }
 
     public Sum() {
+        mSumBody="default";
     }
 
     public String getSumAuthorName() {
