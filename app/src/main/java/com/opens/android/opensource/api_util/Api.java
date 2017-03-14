@@ -54,6 +54,20 @@ public class Api {
     }
 
     /**
+     * @return推荐博客的详情
+     */
+    public String getRecommondBlogDetail(String SumId){
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/blog_detail")
+                .buildUpon()
+                .appendQueryParameter("id", SumId)
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
+    /**
      * @return综合模块--技术问答
      */
     public String getTechQA(){

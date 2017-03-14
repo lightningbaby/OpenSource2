@@ -94,11 +94,11 @@ public class ParseJson {
 //        }
 //        return sumList;
 
-        Document document=  Jsoup.parse(getJsonBody().getString("body"));
-        Elements elements=  document.getElementsByTag("p");
+        Document document=  Jsoup.parse(getJsonBody().getString("body"));//parse的参数是要解析的字符串或网页啥的，比如 <p>hello</p><p>world</p><t>baga</t>
+        Elements elements=  document.getElementsByTag("p");//根据标签解析 存储所有符合条件的东东,比如解析得到集合<p>hello</p><p>world</p>
         String body="";
         for(Element e:elements){
-            body +=e.text();
+            body +=e.text();//遍历符合条件的东东 ，.text方法是取标签里面的内容，比如遍历输出 hello   world
         }
         sum.setSumBody(body);
         return sum;
@@ -128,4 +128,17 @@ public class ParseJson {
         }
         return sumList;
     }
+    public Sum parseRecBlogBody(Sum sum) throws JSONException {
+//        Document document=  Jsoup.parse(getJsonBody().getString("body"));//parse的参数是要解析的字符串或网页啥的，比如 <p>hello</p><p>world</p><t>baga</t>
+//        Elements elements=  document.getElementsByTag("/n");//根据标签解析 存储所有符合条件的东东,比如解析得到集合<p>hello</p><p>world</p>
+//        Element element=document.getBy
+        String body=getJsonBody().getString("body");
+        body=body.replace("\n","");
+//        for(Element e:elements){
+//            body +=e.text();//遍历符合条件的东东 ，.text方法是取标签里面的内容，比如遍历输出 hello   world
+//        }
+        sum.setSumBody(body);
+        return sum;
+    }
+
 }
