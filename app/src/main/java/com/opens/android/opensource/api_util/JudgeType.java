@@ -67,7 +67,8 @@ public class JudgeType {
 
             case "01"://综合--推荐博客
                 jsonBody=new FetchJson(api.getRecommndBlog()).getUrlString();
-                return new ParseJson(jsonBody).parseSumRecommndBlog();
+                List<Sum> sumRecList= new ParseJson(jsonBody).parseSumRecommndBlog();
+                return loadRecBlog(sumRecList);
 
             case "02"://综合--技术问答
                 jsonBody=new FetchJson(api.getTechQA()).getUrlString();
@@ -113,6 +114,16 @@ public class JudgeType {
         for(Sum theSum: sumList){
            jsonBody=new FetchJson(api.getOpenNewsDetailApi(theSum.getSumId())).getUrlString();
             theSum=new ParseJson(jsonBody).parseSumOpenNewsBody(theSum);
+        }
+        return sumList;
+    }
+    public List<Sum> loadRecBlog(List<Sum> sumList) throws IOException, JSONException {
+        Api api=new Api();
+        JSONObject jsonBody;
+
+        for(Sum theSum: sumList){
+           jsonBody=new FetchJson(api.getRecommondBlogDetail(theSum.getSumId())).getUrlString();
+            theSum=new ParseJson(jsonBody).parseRecBlogBody(theSum);
         }
         return sumList;
     }

@@ -5,13 +5,13 @@ package com.opens.android.opensource.tweet;
  */
 
 public class Tweet {
-    private String mTweetAuthorName;
-    private String mTweetId;
-    private String mPortraitUrl;
-    private String mAuthorId;
-    private String mTweetBody;
-    private String mTweetPubDate;
-    private String mCommentCount;
+    private String mTweetAuthorName;//对应技术问答的author
+    private String mTweetId;//对应技术问答的id
+    private String mPortraitUrl;//对应技术问答的portrait
+    private String mAuthorId;//对应技术问答的authorid
+    private String mTweetBody;//对应技术问答的body
+    private String mTweetPubDate;//对应技术问答的pubDate
+    private String mCommentCount;//对应技术问答的answerCount
 
     public Tweet() {
 
