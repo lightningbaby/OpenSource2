@@ -4,4 +4,14 @@
     <string name="news">综合</string>
     <string name="my">我</string>
     <string name="tweet">动弹</string>
+    <string name="example_score">积分：0</string>
+    <string name="example_user_name">用户名</string>
+    <string name="zero">0</string>
+    <string name="favorite">收藏</string>
+    <string name="follow">关注</string>
+    <string name="fans">粉丝</string>
+    <string name="my_message">我的消息</string>
+    <string name="my_blog">我的博客</string>
+    <string name="my_question">我的问答</string>
+    <string name="my_shake">摇一摇</string>
 </resources>

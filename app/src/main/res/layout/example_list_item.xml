@@ -39,6 +39,7 @@
         android:layout_marginLeft="5dp"
         android:layout_below="@id/head"
         android:padding="3dp"
+        android:maxLines="1"
         android:textSize="10dp"
         tools:text="标题"
         />
