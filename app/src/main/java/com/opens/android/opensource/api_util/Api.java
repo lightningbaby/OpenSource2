@@ -8,7 +8,7 @@ import android.net.Uri;
 
 public class Api {
     private static final String TAG = "Api";
-    private static final String ACCESS_TOKEN = "f146017c-d4b3-4be3-9bdf-9d74650b61fe";
+    private static final String ACCESS_TOKEN = "dbd15d02-f049-4289-adc9-26f0593cd0fa";
     public Api() {
     }
 
@@ -82,6 +82,15 @@ public class Api {
         return url;
     }
 
+    public String getTechQADetail(String  tweetId){
+    String url= Uri.parse("https://www.oschina.net/action/openapi/post_detail")
+            .buildUpon()
+            .appendQueryParameter("id", tweetId)
+            .appendQueryParameter("access_token",ACCESS_TOKEN)
+            .appendQueryParameter("dataType", "json")
+            .build().toString();
+    return url;
+    }
     /**
      * @return 综合模块--职业生涯
      */

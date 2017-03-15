@@ -1,5 +1,7 @@
 package com.opens.android.opensource.api_util;
 
+import android.text.Html;
+
 import com.opens.android.opensource.sum.Sum;
 import com.opens.android.opensource.tweet.Tweet;
 
@@ -101,6 +103,10 @@ public class ParseJson {
             body +=e.text();//遍历符合条件的东东 ，.text方法是取标签里面的内容，比如遍历输出 hello   world
         }
         sum.setSumBody(body);
+
+        String detailUrl=getJsonBody().getString("url");
+        sum.setSumDetailUrl(detailUrl);
+
         return sum;
     }
 
@@ -140,5 +146,46 @@ public class ParseJson {
         sum.setSumBody(body);
         return sum;
     }
+
+    /**
+     * @param tweet
+     * @return  获取综合--技术问答的body
+     * @throws JSONException
+     */
+    public Tweet parseTechQABody(Tweet tweet) throws JSONException {
+
+//        Document document=Jsoup.parse(getJsonBody().getString("body"));
+//        Elements elements=document.get
+        String body=getJsonBody().getString("body");
+        tweet.setTweetDetailUrl(getJsonBody().getString("url"));
+
+        tweet.setTweetBody(Html.fromHtml(body).toString());
+        return tweet;
+    }
+
+    /**
+     * @return  解析综合--技术问答列表--不包含body
+     * @throws JSONException
+     */
+    public List<Tweet> parseTechQA() throws JSONException {
+
+        List<Tweet> tweetList=new ArrayList<>();
+        JSONArray newsJsonArray =getJsonBody().getJSONArray("post_list");
+
+        for (int i=0;i<newsJsonArray.length();i++){
+            JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);
+            Tweet tweet=new Tweet();
+            tweet.setAuthor(newsJsonObject.getString("author"));
+            tweet.setTweetId(newsJsonObject.getString("id"));
+            tweet.setPortraitUrl(newsJsonObject.getString("portrait"));
+            tweet.setAuthorId(newsJsonObject.getString("authorid"));
+            tweet.setTweetPubDate(newsJsonObject.getString("pubDate"));
+            tweet.setCommentCount(newsJsonObject.getString("answerCount"));
+            tweet.setTweetTitle(newsJsonObject.getString("title"));
+            tweetList.add(tweet);
+        }
+        return tweetList;
+    }
+
 
 }

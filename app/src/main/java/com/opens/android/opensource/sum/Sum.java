@@ -14,6 +14,22 @@ public class Sum {//综合---开源资讯和推荐博客
     private String mSumPubDate;
     private String mSumCommentCount;
     private String mSumBody;
+    private String mSumDetailUrl;
+
+
+    public Sum() {
+        mSumBody="default";
+        mSumTitle="default-title";
+    }
+
+
+    public String getSumDetailUrl() {
+        return mSumDetailUrl;
+    }
+
+    public void setSumDetailUrl(String sumDetailUrl) {
+        mSumDetailUrl = sumDetailUrl;
+    }
 
     public String getSumBody() {
         return mSumBody;
@@ -23,9 +39,7 @@ public class Sum {//综合---开源资讯和推荐博客
         mSumBody = sumBody;
     }
 
-    public Sum() {
-        mSumBody="default";
-    }
+
 
     public String getSumAuthorName() {
         return mSumAuthorName;

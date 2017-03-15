@@ -68,9 +68,14 @@ public class JudgeType {
 
             case "02"://综合--技术问答
                 jsonBody=new FetchJson(api.getTechQA()).getUrlString();
+                List<Tweet> tweetTechQAList=new ParseJson(jsonBody).parseTechQA();
+                return loadTechQABody(tweetTechQAList);
+
 
             case"03"://综合--职业生涯
                 jsonBody=new FetchJson(api.getJobCareer()).getUrlString();
+                List<Tweet> jobCareerList=new ParseJson(jsonBody).parseTechQA();
+                return loadTechQABody(jobCareerList);
 
             case "10"://the latest tweet
                 Log.d(LATEST_TWEET,"latest tweet");
@@ -110,6 +115,24 @@ public class JudgeType {
             theSum=new ParseJson(jsonBody).parseRecBlogBody(theSum);
         }
         return sumList;
+    }
+
+    /**
+     * @param tweetList  综合--技术问答的body
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
+    public List<Tweet> loadTechQABody(List<Tweet> tweetList) throws IOException, JSONException {
+        Api api=new Api();
+        JSONObject jsonBody;
+
+        for (Tweet tweet:
+             tweetList) {
+            jsonBody=new FetchJson(api.getTechQADetail(tweet.getTweetId())).getUrlString();
+            tweet=new ParseJson(jsonBody).parseTechQABody(tweet);
+        }
+        return  tweetList;
     }
 
 }

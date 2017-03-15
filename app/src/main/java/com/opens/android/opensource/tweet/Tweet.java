@@ -12,9 +12,35 @@ public class Tweet {
     private String mTweetBody;//对应技术问答的body
     private String mTweetPubDate;//对应技术问答的pubDate
     private String mCommentCount;//对应技术问答的answerCount
+    private String mTweetTitle;//技术问答的title
+    private String mTweetDetailUrl;
+
+    public String getTweetDetailUrl() {
+        return mTweetDetailUrl;
+    }
+
+    public void setTweetDetailUrl(String tweetDetailUrl) {
+        mTweetDetailUrl = tweetDetailUrl;
+    }
 
     public Tweet() {
 
+    }
+
+    public String getTweetAuthorName() {
+        return mTweetAuthorName;
+    }
+
+    public void setTweetAuthorName(String tweetAuthorName) {
+        mTweetAuthorName = tweetAuthorName;
+    }
+
+    public String getTweetTitle() {
+        return mTweetTitle;
+    }
+
+    public void setTweetTitle(String tweetTitle) {
+        mTweetTitle = tweetTitle;
     }
 
     public String getAuthor() {

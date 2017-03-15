@@ -47,7 +47,7 @@ public class SumFragment extends Fragment {
 
     class MenuAdapter extends BaseAdapter{
         String[] names = new String[]
-                { "菜单一", "菜单二", "菜单三", "菜单四", "菜单五", "菜单六", "菜单七","菜单八" };
+                { "菜单一", "菜单二", "菜单三", "菜单四" };
 
         @Override
         public List<String> getMenuItems() {
@@ -78,7 +78,10 @@ public class SumFragment extends Fragment {
                         new SumItem(recy,getActivity(),SumFragment.this,"01");//
                         break;
                     case 2:
-                       // new SumItem(recy,getActivity(),SumFragment.this,"02");//
+                        new TechQAItem(recy,getActivity(),SumFragment.this,"02");//
+                        break;
+                    case 3:
+                        new TechQAItem(recy,getActivity(),SumFragment.this,"03");//
                         break;
 
                 }
