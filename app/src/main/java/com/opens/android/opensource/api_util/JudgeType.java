@@ -30,6 +30,10 @@ public class JudgeType {
     private final String MY_TWEET="MY_TWEET";//12
 
 
+    private final  String KIND_SOFTWARE ="KIND_SOFTWARE" ;//30
+    private final String ITEM_SOFTWARE="ITEM_SOFTWARE";// 31 32  33 34
+
+
     private String Type;
 
 
@@ -91,6 +95,18 @@ public class JudgeType {
                 Log.d(MY_TWEET,"hot tweet");
                 jsonBody=new FetchJson(api.getTweetListApi(getType())).getUrlString();
                 return new ParseJson(jsonBody).parseTweets();
+            case "30":
+                Log.d(KIND_SOFTWARE," open software kind");
+                jsonBody=new FetchJson(api.getSoftwareListApi(getType())).getUrlString();
+                return new ParseJson(jsonBody).parseKindSoftwares();
+
+            case "31":
+            case "32":
+            case "33":
+            case "34":
+                Log.d(ITEM_SOFTWARE," open software kind");
+                jsonBody=new FetchJson(api.getSoftwareListApi(getType())).getUrlString();
+                return new ParseJson(jsonBody).parseItemSoftwares();
 
         }
         return null;

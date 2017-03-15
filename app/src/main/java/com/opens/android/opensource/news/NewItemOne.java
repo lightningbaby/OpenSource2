@@ -1,6 +1,7 @@
 package com.opens.android.opensource.news;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -15,9 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.opens.android.opensource.R;
 import com.opens.android.opensource.api_util.JudgeType;
+import com.opens.android.opensource.api_util.WebViewActivity;
 import com.opens.android.opensource.fetchsource.ThumbnailDownloader;
 import com.opens.android.opensource.tweet.Tweet;
 import com.opens.android.opensource.tweet.TweetFetch;
@@ -34,6 +37,9 @@ import java.util.List;
  */
 
 public class NewItemOne {
+    private String EXTRA_CRIME_ID ="EXTRA_CRIME_ID";
+    private String EXTRA_CRIME_IDENTIFY ="EXTRA_CRIME_IDENTIFY";
+
     private RecyclerView mPhotoRecyclerView;
     private static final String TAG="NewsItemOne";
     private List<Tweet> mItems = new ArrayList<>();
@@ -108,13 +114,15 @@ public class NewItemOne {
     }
 
     //set view
-    private class PhotoHolder extends RecyclerView.ViewHolder {
+    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //VH 里放 View组件
         private ImageView mTweetPortraitImageView;
         private TextView mAuthorTextView;
         private TextView mTweetBodyTextView;
         private TextView mTweetTimeView;
         private TextView mCommentView;
+        private Tweet mTweet;
+
 
         public PhotoHolder(View itemView) {
             super(itemView);
@@ -131,10 +139,24 @@ public class NewItemOne {
         }
 
         public void bindTweetOthers(Tweet tweet){
+            mTweet=tweet;
+
             mAuthorTextView.setText(tweet.getAuthor().toString());
             mTweetBodyTextView.setText(tweet.getTweetBody().toString());
             mTweetTimeView.setText(tweet.getTweetPubDate().toString());
             mCommentView.setText("评论："+tweet.getCommentCount().toString());
+            itemView.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View v) {
+//            Toast.makeText(mContext,
+//                    mTweet.getTweetId() + " clicked!", Toast.LENGTH_SHORT)
+//                    .show();
+
+//            Intent intent = new Intent(mContext, WebViewActivity.class);
+//            intent.putExtra(EXTRA_CRIME_ID, mTweet.getTweetId());
+//            intent.putExtra(EXTRA_CRIME_IDENTIFY, "10");
+//            mContext.startActivity(intent);
         }
     }
 
