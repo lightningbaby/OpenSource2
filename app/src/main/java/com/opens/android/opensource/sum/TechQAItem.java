@@ -2,6 +2,7 @@ package com.opens.android.opensource.sum;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.opens.android.opensource.R;
 import com.opens.android.opensource.api_util.JudgeType;
+import com.opens.android.opensource.api_util.WebViewActivity;
 import com.opens.android.opensource.fetchsource.ThumbnailDownloader;
 import com.opens.android.opensource.tweet.Tweet;
 
@@ -43,6 +45,12 @@ public class TechQAItem{
     private Context mContext;
     private Fragment mFragment;
     private String bigType;//决定是综合中技术问答还是职业生涯
+    //    private String EXTRA_CRIME_ID ="EXTRA_CRIME_ID";
+//    private String EXTRA_CRIME_IDENTIFY ="EXTRA_CRIME_IDENTIFY";
+    private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";
+
+
+
 
     public TechQAItem(RecyclerView mRcycle, Context context, Fragment fragment,String str){
         mPhotoRecyclerView=mRcycle;
@@ -98,13 +106,14 @@ public class TechQAItem{
             setupAdapter();
         }
     }
-    private class PhotoHolder extends RecyclerView.ViewHolder{
+    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView mTechPortraitImageView;
         private TextView mTitleTextView;
         private TextView mTechQABodyTextView;
         private TextView mTechAuthorView;
         private TextView mDateTextView;
         private TextView mCommentView;
+        private Tweet mTweet;
 
         public PhotoHolder(View itemView){
             super(itemView);
@@ -121,11 +130,25 @@ public class TechQAItem{
 
         }
         public void bindTweetOthers(Tweet tweet){
+            mTweet=tweet;
             mTitleTextView.setText(tweet.getTweetTitle().toString());
             mTechAuthorView.setText(tweet.getTweetAuthorName().toString());
             mTechQABodyTextView.setText(tweet.getTweetBody().toString());
             mDateTextView.setText(tweet.getTweetPubDate().toString());
             mCommentView.setText("评论："+tweet.getCommentCount().toString());
+            itemView.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View v) {
+//            Toast.makeText(mContext,
+//                    mTweet.getTweetId() + " clicked!", Toast.LENGTH_SHORT)
+//                    .show();
+
+            Intent intent = new Intent(mContext, WebViewActivity.class);
+//            intent.putExtra(EXTRA_CRIME_ID, mSoftware.getName());
+//            intent.putExtra(EXTRA_CRIME_IDENTIFY, "31");
+            intent.putExtra(EXTRA_CRIME_URL,mTweet.getTweetDetailUrl());
+            mContext.startActivity(intent);
         }
     }
     private class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder>{

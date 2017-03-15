@@ -35,6 +35,7 @@ public class DiscoverItemOne {
     private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";
 
 
+
     private RecyclerView mPhotoRecyclerView;
     private static final String TAG="NewsItemOne";
     private List<Software> mItems = new ArrayList<>();
@@ -45,6 +46,7 @@ public class DiscoverItemOne {
 
 
     public DiscoverItemOne(RecyclerView mRcycle, Context context, Fragment fragment, String str){
+
         mPhotoRecyclerView=mRcycle;
         mContext=context;
         mFragment=fragment;
@@ -112,10 +114,11 @@ public class DiscoverItemOne {
 //                    mTweet.getTweetId() + " clicked!", Toast.LENGTH_SHORT)
 //                    .show();
 
-//            Intent intent = new Intent(mContext, WebViewActivity.class);
-//            intent.putExtra(EXTRA_CRIME_ID, mSoftware.getName());
-//            intent.putExtra(EXTRA_CRIME_IDENTIFY, "30");
-//            mContext.startActivity(intent);
+//           Intent intent = new Intent(mContext, WebViewActivity.class);
+////            intent.putExtra(EXTRA_CRIME_ID, mSoftware.getName());
+////            intent.putExtra(EXTRA_CRIME_IDENTIFY, "30");
+//            intent.putExtra(EXTRA_CRIME_URL,mSoftware.getUrl());
+//          mContext.startActivity(intent);
         }
     }
 

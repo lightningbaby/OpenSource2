@@ -64,7 +64,7 @@ public class NewItemOne {
                 new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
                     @Override
                     public void onThumbnailDownloaded(PhotoHolder photoHolder, Bitmap thumbnail) {
-                        Drawable drawable=new BitmapDrawable(mFragment.getResources(),thumbnail);
+                        Drawable drawable=new BitmapDrawable(mContext.getResources(),thumbnail);
                         photoHolder.bindDrawable(drawable);
                     }
                 }

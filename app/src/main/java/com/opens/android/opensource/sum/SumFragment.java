@@ -83,7 +83,6 @@ public class SumFragment extends Fragment {
                     case 3:
                         new TechQAItem(recy,getActivity(),SumFragment.this,"03");//
                         break;
-
                 }
             }
             return views;

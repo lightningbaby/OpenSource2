@@ -36,8 +36,8 @@ public class DiscoverItemTwo {
     private Fragment mFragment;
     private String mString;
 
-    private String EXTRA_CRIME_ID ="EXTRA_CRIME_ID";
-    private String EXTRA_CRIME_IDENTIFY ="EXTRA_CRIME_IDENTIFY";
+//    private String EXTRA_CRIME_ID ="EXTRA_CRIME_ID";
+//    private String EXTRA_CRIME_IDENTIFY ="EXTRA_CRIME_IDENTIFY";
     private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";
 
 
@@ -109,8 +109,8 @@ public class DiscoverItemTwo {
 //                    .show();
 
             Intent intent = new Intent(mContext, WebViewActivity.class);
-            intent.putExtra(EXTRA_CRIME_ID, mSoftware.getName());
-            intent.putExtra(EXTRA_CRIME_IDENTIFY, "31");
+//            intent.putExtra(EXTRA_CRIME_ID, mSoftware.getName());
+//            intent.putExtra(EXTRA_CRIME_IDENTIFY, "31");
             intent.putExtra(EXTRA_CRIME_URL,mSoftware.getUrl());
             mContext.startActivity(intent);
         }

@@ -1,6 +1,7 @@
 package com.opens.android.opensource.sum;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.opens.android.opensource.R;
 import com.opens.android.opensource.api_util.JudgeType;
+import com.opens.android.opensource.api_util.WebViewActivity;
 import com.opens.android.opensource.fetchsource.ThumbnailDownloader;
 
 
@@ -32,6 +34,10 @@ import java.util.List;
  */
 
 public class SumItem {
+    //    private String EXTRA_CRIME_ID ="EXTRA_CRIME_ID";
+//    private String EXTRA_CRIME_IDENTIFY ="EXTRA_CRIME_IDENTIFY";
+    private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";
+
     private RecyclerView mPhotoRecyclerView;
     private static final String TAG="SumItem";
     private List<Sum> mItems = new ArrayList<>();
@@ -98,7 +104,7 @@ public class SumItem {
             setupAdapter();
         }
     }
-    private class PhotoHolder extends RecyclerView.ViewHolder{
+    private class PhotoHolder extends RecyclerView.ViewHolder   implements View.OnClickListener {
 
         private TextView mTitleTextView;
         private TextView mAbstractTextView;
@@ -106,6 +112,7 @@ public class SumItem {
         private TextView mDateTextView;
         private TextView mCommentTextView;
         private ImageView mImageView;
+        private Sum mSum;
 
         public PhotoHolder(View itemView) {
             super(itemView);
@@ -121,12 +128,27 @@ public class SumItem {
 
         }
         public void bindSumOthers(Sum sum){
+            mSum=sum;
 
             mTitleTextView.setText(sum.getSumTitle().toString());
             mAuthorTextView.setText("@"+sum.getSumAuthorName().toString());
             mDateTextView.setText(sum.getSumPubDate().toString());
             mCommentTextView.setText("评论 "+sum.getSumCommentCount().toString());
             mAbstractTextView.setText(sum.getSumBody().toString());
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+//            Toast.makeText(mContext,
+//                    mTweet.getTweetId() + " clicked!", Toast.LENGTH_SHORT)
+//                    .show();
+
+            Intent intent = new Intent(mContext, WebViewActivity.class);
+//            intent.putExtra(EXTRA_CRIME_ID, mSoftware.getName());
+//            intent.putExtra(EXTRA_CRIME_IDENTIFY, "31");
+            intent.putExtra(EXTRA_CRIME_URL,mSum.getSumDetailUrl());
+            mContext.startActivity(intent);
         }
 
     }
