@@ -1,5 +1,6 @@
 package com.opens.android.opensource.api_util;
 
+import com.opens.android.opensource.discover.Software;
 import com.opens.android.opensource.sum.Sum;
 import com.opens.android.opensource.tweet.Tweet;
 

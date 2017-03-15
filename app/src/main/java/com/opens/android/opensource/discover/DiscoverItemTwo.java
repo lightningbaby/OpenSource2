@@ -1,6 +1,7 @@
 package com.opens.android.opensource.discover;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.opens.android.opensource.R;
 import com.opens.android.opensource.api_util.JudgeType;
+import com.opens.android.opensource.api_util.WebViewActivity;
 import com.opens.android.opensource.tweet.Tweet;
 
 import org.json.JSONException;
@@ -33,6 +35,10 @@ public class DiscoverItemTwo {
     private Context mContext;
     private Fragment mFragment;
     private String mString;
+
+    private String EXTRA_CRIME_ID ="EXTRA_CRIME_ID";
+    private String EXTRA_CRIME_IDENTIFY ="EXTRA_CRIME_IDENTIFY";
+    private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";
 
 
     public DiscoverItemTwo(RecyclerView mRcycle, Context context, Fragment fragment, String str){
@@ -79,19 +85,34 @@ public class DiscoverItemTwo {
     }
 
     //set view
-    private class PhotoHolder extends RecyclerView.ViewHolder {
+    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView nameTextView;
         private TextView  desTextView;
+        private Software mSoftware;
 
 
         public PhotoHolder(View itemView) {
             super(itemView);
             nameTextView= (TextView) itemView.findViewById(R.id.software_kind_name);
             desTextView=(TextView) itemView.findViewById(R.id.software_description);
+            itemView.setOnClickListener(this);
         }
         public void bindSoftOthers(Software software){
+            mSoftware=software;
             nameTextView.setText(software.getName().toString());
             desTextView.setText(software.getDescription().toString());
+        }
+        @Override
+        public void onClick(View v) {
+//            Toast.makeText(mContext,
+//                    mTweet.getTweetId() + " clicked!", Toast.LENGTH_SHORT)
+//                    .show();
+
+            Intent intent = new Intent(mContext, WebViewActivity.class);
+            intent.putExtra(EXTRA_CRIME_ID, mSoftware.getName());
+            intent.putExtra(EXTRA_CRIME_IDENTIFY, "31");
+            intent.putExtra(EXTRA_CRIME_URL,mSoftware.getUrl());
+            mContext.startActivity(intent);
         }
     }
 

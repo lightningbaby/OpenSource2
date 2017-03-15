@@ -8,7 +8,7 @@ import android.net.Uri;
 
 public class Api {
     private static final String TAG = "Api";
-    private static final String ACCESS_TOKEN = "f146017c-d4b3-4be3-9bdf-9d74650b61fe";
+    private static final String ACCESS_TOKEN = "9714012a-347c-4d2e-a677-3625e78c151f";
     public Api() {
     }
 
@@ -167,7 +167,7 @@ public class Api {
 //  https://www.oschina.net/action/openapi/project_list?access_token=f146017c-d4b3-4be3-9bdf-9d74650b61fe&type=recommend&dataType=json
 //    https://www.oschina.net/action/openapi/project_list?access_token=f146017c-d4b3-4be3-9bdf-9d74650b61fe&type=time&dataType=json
 //    https://www.oschina.net/action/openapi/project_list?access_token=f146017c-d4b3-4be3-9bdf-9d74650b61fe&type=view&dataType=json
-//    https://www.oschina.net/action/openapi/project_list?access_token=f146017c-d4b3-4be3-9bdf-9d74650b61fe&type=cn&dataType=json
+//    https://www.oschina.net/action/openapi/project_list?access_token=9714012a-347c-4d2e-a677-3625e78c151f&type=cn&dataType=json
 
 
 

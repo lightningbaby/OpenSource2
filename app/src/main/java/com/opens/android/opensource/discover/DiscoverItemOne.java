@@ -1,6 +1,7 @@
 package com.opens.android.opensource.discover;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.opens.android.opensource.R;
 import com.opens.android.opensource.api_util.JudgeType;
+import com.opens.android.opensource.api_util.WebViewActivity;
 import com.opens.android.opensource.fetchsource.ThumbnailDownloader;
 
 import org.json.JSONException;
@@ -27,6 +29,12 @@ import java.util.List;
  */
 
 public class DiscoverItemOne {
+
+    private String EXTRA_CRIME_ID ="EXTRA_CRIME_ID";
+    private String EXTRA_CRIME_IDENTIFY ="EXTRA_CRIME_IDENTIFY";
+    private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";
+
+
     private RecyclerView mPhotoRecyclerView;
     private static final String TAG="NewsItemOne";
     private List<Software> mItems = new ArrayList<>();
@@ -85,8 +93,9 @@ public class DiscoverItemOne {
     }
 
     //set view
-    private class PhotoHolder extends RecyclerView.ViewHolder {
+    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView kinditem;
+        private Software mSoftware;
 
 
         public PhotoHolder(View itemView) {
@@ -94,7 +103,19 @@ public class DiscoverItemOne {
             kinditem= (TextView) itemView.findViewById(R.id.software_kind_name);
         }
         public void bindSoftOthers(Software software){
+            mSoftware=software;
             kinditem.setText(software.getName().toString());
+        }
+        @Override
+        public void onClick(View v) {
+//            Toast.makeText(mContext,
+//                    mTweet.getTweetId() + " clicked!", Toast.LENGTH_SHORT)
+//                    .show();
+
+//            Intent intent = new Intent(mContext, WebViewActivity.class);
+//            intent.putExtra(EXTRA_CRIME_ID, mSoftware.getName());
+//            intent.putExtra(EXTRA_CRIME_IDENTIFY, "30");
+//            mContext.startActivity(intent);
         }
     }
 
