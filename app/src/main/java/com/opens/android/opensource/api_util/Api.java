@@ -8,9 +8,50 @@ import android.net.Uri;
 
 public class Api {
     private static final String TAG = "Api";
-    private static final String ACCESS_TOKEN = "dbd15d02-f049-4289-adc9-26f0593cd0fa";
+    public static final String APP_ID= "67g5B5iJJGsNdOc6LfeH";
+    public static final String APP_SCERET= "KhcsXw4sYug5Lr7zHDoERCa7nNk0b6Yt";
+    public static final String GRANT_TYPE="authorization_code";
+    public static final String CALL_BACK_URL= "https://my.oschina.net/u/2962802";
+    private static  String ACCESS_TOKEN;
+
+//    private String accessToken;
+
+
+
     public Api() {
     }
+
+    public Api(String access) {
+
+        ACCESS_TOKEN=access;
+    }
+
+    public String getAccessToken() {
+        return ACCESS_TOKEN;
+    }
+
+    public void setAccessToken(String accessToken) {
+        ACCESS_TOKEN = accessToken;
+    }
+
+    //获取access token
+    public String getAccessToken(String code){
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/token")
+                .buildUpon()
+                .appendQueryParameter("client_id",APP_ID)
+                .appendQueryParameter("client_secret", APP_SCERET)
+                .appendQueryParameter("grant_type", GRANT_TYPE)
+                .appendQueryParameter("redirect_uri", CALL_BACK_URL)
+                .appendQueryParameter("code", code)
+                .appendQueryParameter("refresh_token", "")
+                .appendQueryParameter("dataType", "json")
+                .appendQueryParameter("callback", "json")
+                .build().toString();
+        return url;
+
+    }
+
 
     /**
      * @return 综合模块--开源咨询--列表--不包含摘要

@@ -40,6 +40,10 @@ public class ParseJson {
         this.jsonBody = jsonBody;
     }
 
+//获取access token
+    public String paserAccessToken() throws JSONException {
+        return getJsonBody().getString("access_token");
+    }
 
     public List<Tweet> parseTweets() throws JSONException {
 

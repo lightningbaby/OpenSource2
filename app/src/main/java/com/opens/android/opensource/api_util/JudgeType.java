@@ -53,6 +53,9 @@ public class JudgeType {
      */
     public List<?> JudgeAndRet() throws IOException, JSONException {
         Api api=new Api();
+        if(api.getAccessToken()==null){
+            System.out.println("access token is null++++++++++++++++++++++++++++++++++++++++++++");
+        }
         JSONObject jsonBody=new JSONObject();
 //        List<Tweet> mTweets = new ArrayList<>();
 //        List<Sum> sumList=new ArrayList<>();

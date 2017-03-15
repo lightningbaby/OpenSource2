@@ -14,4 +14,7 @@
     <string name="my_blog">我的博客</string>
     <string name="my_question">我的问答</string>
     <string name="my_shake">摇一摇</string>
+    <string name="login_input_username_hint">请输入账号</string>
+    <string name="login_input_password_hint">请输入密码</string>
+    <string name="login">对应用授权</string>
 </resources>
