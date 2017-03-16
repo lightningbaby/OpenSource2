@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.opens.android.opensource.R;
+import com.opens.android.opensource.api_util.Api;
+import com.opens.android.opensource.api_util.FetchJson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -51,6 +58,7 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
     private View AddPicLayer;
     private LinearLayout AddPicOption;
     private TextView addpic;
+    private final String TWEET_PUB="tweet pub";
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -206,11 +214,32 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
                 //Toast.makeText(this,"消息内容："+str,Toast.LENGTH_SHORT);
                 AddTweetActivity.this.finish();
                 //new TweetFetch().fetchaddItems(str);
+//                调用后台发动弹
+                new pubMsg().execute(str);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    private class pubMsg extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            Api api=new Api();
+            System.out.println("Image Activity  accesstoken-------------------"+api.getAccessToken());
+            JSONObject jsonBody=new JSONObject();
+            try {
+                jsonBody= new FetchJson((api.getPubTweetUrl(strings[0]))).getUrlString();
+                System.out.println("jsonbody===================================================="+jsonBody.toString());
+                Log.d(TWEET_PUB,jsonBody.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return jsonBody.toString();
+        }
     }
 
     @Override
