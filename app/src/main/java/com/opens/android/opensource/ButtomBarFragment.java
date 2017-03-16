@@ -1,12 +1,24 @@
 package com.opens.android.opensource;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import com.opens.android.opensource.api_util.WebViewActivity;
+import com.opens.android.opensource.tweet.Tweet;
+
+import java.util.List;
 
 /**
  * Created by ttc on 2017/3/12.
@@ -20,6 +32,9 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
     private RelativeLayout tweet_layout;
     private RelativeLayout my_layout;
     private RelativeLayout add_layout;
+
+    private  String TAG="ButtomBarFragment";
+    private String SEARCH_KEY="SEARCH_KEY";
 
   //  private Enum NEWS,TWEET,DISCOVER,MINE;
 
@@ -39,6 +54,31 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
         super.onDetach();
         mCallbacks = null;
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        super.onCreateOptionsMenu(menu, menuInflater);
+        menuInflater.inflate(R.menu.main_search_view, menu);
+        MenuItem searchItem = menu.findItem(R.id.menu_item_search);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Log.d(TAG, "QueryTextSubmit: " + s);
+                if(!s.isEmpty()) {
+                    Intent intent = new Intent(getActivity(), SerachResultActivity.class);
+                    intent.putExtra(SEARCH_KEY,s);
+                    startActivity(intent);
+                }
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Log.d(TAG, "QueryTextChange: " + s);
+                return false;
+            }
+        });
+    }
+
 
 
     @Override
@@ -86,5 +126,8 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
         }
         mCallbacks.onItemSelected(position);
     }
+
+
+
 }
 

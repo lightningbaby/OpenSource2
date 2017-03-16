@@ -221,4 +221,22 @@ public class Api {
 
 
 
+  //  https://www.oschina.net/action/openapi/search_list?access_token=b7436a62-e11b-4f3b-82bb-2847fb59ee49&catalog=news&q=android&pageSize=20&page=1&dataType=json
+
+    public String getSearchNewsApi(String searchKey){
+        String keyQ=searchKey;//default the latest
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/search_list")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("catalog", "news")
+                .appendQueryParameter("q", keyQ)
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("page/pageIndex", "1")
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
+
 }
