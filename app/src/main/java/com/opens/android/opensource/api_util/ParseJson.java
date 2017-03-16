@@ -231,6 +231,28 @@ public class ParseJson {
         return tweetList;
     }
 
+    /**
+     * @return  解析综合--技术问答列表--不包含body
+     * @throws JSONException
+     */
+    public List<Tweet> parseSearchNewsResult() throws JSONException {
+
+        List<Tweet> tweetList=new ArrayList<>();
+        JSONArray newsJsonArray =getJsonBody().getJSONArray("searchlist");
+
+        for (int i=0;i<newsJsonArray.length();i++){
+            JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);
+            Tweet tweet=new Tweet();
+            tweet.setAuthor(newsJsonObject.getString("author"));
+            tweet.setTweetId(newsJsonObject.getString("id"));
+            tweet.setTweetTitle(newsJsonObject.getString("title"));
+            tweet.setTweetPubDate(newsJsonObject.getString("pubDate"));
+            tweet.setTweetDetailUrl(newsJsonObject.getString("url"));
+            tweetList.add(tweet);
+        }
+        return tweetList;
+    }
+
 
     /**
      * @return

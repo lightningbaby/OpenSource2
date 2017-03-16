@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements ButtomBarFragment
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container_top, newFragment)
                 .commit();
+        fragment.setHasOptionsMenu(true);
     }
     @Override
     public void onItemSelected(int num) {

@@ -15,6 +15,7 @@ public class Tweet {
     private String mTweetTitle;//技术问答的title
     private String mTweetDetailUrl;
 
+
     public String getTweetDetailUrl() {
         return mTweetDetailUrl;
     }

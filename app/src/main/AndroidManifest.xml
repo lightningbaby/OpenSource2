@@ -30,6 +30,11 @@
                   android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".api_util.WebViewActivity">
         </activity>
+
+        <activity android:name=".SerachResultActivity">
+        </activity>
+
+
     </application>
 
 </manifest>
