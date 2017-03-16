@@ -1,5 +1,6 @@
 package com.opens.android.opensource.api_util;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 /**
@@ -8,11 +9,11 @@ import android.net.Uri;
 
 public class Api {
     private static final String TAG = "Api";
-    public static final String APP_ID= "67g5B5iJJGsNdOc6LfeH";
-    public static final String APP_SCERET= "KhcsXw4sYug5Lr7zHDoERCa7nNk0b6Yt";
+    public static final String APP_ID= "OMLCTCM2aKXpnlXeEoI1";
+    public static final String APP_SCERET= "Uo52vp8wmE4vb5okdm4XqiHKDWPSTNM1";
     public static final String GRANT_TYPE="authorization_code";
-    public static final String CALL_BACK_URL= "https://my.oschina.net/u/2962802";
-    private static  String ACCESS_TOKEN;
+    public static final String CALL_BACK_URL= "https://my.oschina.net/lightningbaby";
+    public static  String ACCESS_TOKEN;
 
 //    private String accessToken;
 
@@ -51,7 +52,25 @@ public class Api {
         return url;
 
     }
+    public String getInitUrl(){
+        String url= Uri.parse("https://www.oschina.net/action/oauth2/authorize")
+                .buildUpon()
+                .appendQueryParameter("response_type","code")
+                .appendQueryParameter("client_id", APP_ID)
+                .appendQueryParameter("redirect_uri",CALL_BACK_URL)
+                .build().toString();
+        return url;
+    }
 
+    public String getPubTweetUrl(String msg){
+        String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_pub")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("msg", msg)
+//                .appendQueryParameter("image", image.toString())
+                .build().toString();
+        return url;
+    }
 
     /**
      * @return 综合模块--开源咨询--列表--不包含摘要

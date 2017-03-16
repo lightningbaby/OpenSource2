@@ -1,14 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<EditText xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/add_edit"
-              android:layout_width="match_parent"
-          android:inputType="textMultiLine"
-          android:hint="发表动弹..."
-          android:padding="10dp"
-          android:textCursorDrawable="@drawable/edit_cursor"
-          android:background="@drawable/edit_shape"
-          android:gravity="top"
-          android:imeOptions="flagNoExtractUi"
-          android:layout_height="match_parent">
 
-</EditText>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_height="match_parent"
+              android:layout_width="match_parent"
+          >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="50dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:id="@+id/add_edit"
+            android:hint="发表动弹..."
+            android:padding="10dp"
+            android:textCursorDrawable="@drawable/edit_cursor"
+            android:background="@drawable/edit_shape"
+            android:gravity="top"
+            android:imeOptions="flagNoExtractUi"/>
+
+
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <View
+            android:id="@+id/photo_layer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+             />
+        <LinearLayout
+            android:id="@+id/add_pic_pull"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/chose_pic_bg"
+            android:orientation="vertical"
+            android:translationY="200dp">
+            <!--android:translationY="200dp"-->
+
+            <TextView
+                android:id="@+id/add_pic_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="@string/add_pic"
+                android:textColor="@color/gray_dedede"
+                android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:paddingBottom="50dp"
+                android:id="@+id/add_pic_options">
+                <GridView
+                    android:id="@+id/gridView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:background="#EFDFDF"
+                    android:horizontalSpacing="5dp"
+                    android:verticalSpacing="5dp"
+                    android:numColumns="4"
+                    android:columnWidth="90dp"
+                    android:stretchMode="columnWidth"
+                    android:gravity="center" >
+                </GridView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>

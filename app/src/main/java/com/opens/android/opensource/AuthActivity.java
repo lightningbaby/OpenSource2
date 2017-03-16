@@ -28,10 +28,10 @@ import java.io.IOException;
 
 public class AuthActivity extends AppCompatActivity{
     private WebView AuthView;
-    public static final String CALL_BACK_URL= "https://my.oschina.net/u/2962802";
     public static final String AUTH_URL= "https://www.oschina.net/action/oauth2/authorize?response_type=code&client_id=67g5B5iJJGsNdOc6LfeH&redirect_uri=https://my.oschina.net/u/2962802";
     private String mCode;
     RequestQueue mQueue;
+    public static final String CALL_BACK_URL= "https://my.oschina.net/lightningbaby";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +45,7 @@ public class AuthActivity extends AppCompatActivity{
         webSettings.setAllowContentAccess(true);
         webSettings.setAppCacheEnabled(false);
         webSettings.setBuiltInZoomControls(false);
-        webSettings.setUseWideViewPort(true);
+        //webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         auth();
@@ -85,7 +85,8 @@ public class AuthActivity extends AppCompatActivity{
                 }
 
             });
-            AuthView.loadUrl(AUTH_URL);
+
+            AuthView.loadUrl(new Api().getInitUrl());
         }
     }
     private String getCodeFromUrl(String url) {
@@ -101,9 +102,7 @@ public class AuthActivity extends AppCompatActivity{
         mCode = returnCode;
 
         new FetchAccessToken().execute();
-        Intent i=new Intent(AuthActivity.this,MainActivity.class);
-        startActivity(i);
-        finish();
+
 
     }
 
@@ -127,5 +126,15 @@ public class AuthActivity extends AppCompatActivity{
             }
             return null;
         }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Intent i=new Intent(AuthActivity.this,MainActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
+
+
 }
