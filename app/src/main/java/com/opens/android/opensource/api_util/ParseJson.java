@@ -232,4 +232,29 @@ public class ParseJson {
     }
 
 
+    /**
+     * @return
+     * @throws JSONException  收藏 关注 粉丝
+     */
+    public List<Tweet> parseFavorList() throws JSONException {
+
+        List<Tweet> tweetList=new ArrayList<>();
+        JSONArray newsJsonArray =getJsonBody().getJSONArray("favoriteList");
+
+        for (int i=0;i<newsJsonArray.length();i++){
+            JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);
+            Tweet tweet=new Tweet();
+            tweet.setTweetTitle(newsJsonObject.getString("title"));
+            tweet.setTweetId(newsJsonObject.getString("id"));//对应 favorite中的objid
+            tweet.setAuthorId(newsJsonObject.getString("type"));
+            tweet.setTweetDetailUrl(newsJsonObject.getString("url"));
+
+
+            tweetList.add(tweet);
+        }
+        return tweetList;
+    }
+
+
+
 }

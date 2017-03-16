@@ -9,8 +9,8 @@ import android.net.Uri;
 
 public class Api {
     private static final String TAG = "Api";
-    public static final String APP_ID= "OMLCTCM2aKXpnlXeEoI1";
-    public static final String APP_SCERET= "Uo52vp8wmE4vb5okdm4XqiHKDWPSTNM1";
+    public static final String APP_ID= "xyE3FtbFZ9VekutWaFWn";
+    public static final String APP_SCERET= "ldxzijw5P1gR3yohBcpYfXgIo8bpWild";
     public static final String GRANT_TYPE="authorization_code";
     public static final String CALL_BACK_URL= "https://my.oschina.net/lightningbaby";
     public static  String ACCESS_TOKEN;
@@ -61,7 +61,101 @@ public class Api {
                 .build().toString();
         return url;
     }
+//个人信息
 
+    /**
+     * @param userId 获取用户发布过的动弹列表
+     * @return
+     */
+    public String getUserTweet(String userId){
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_list")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("user", userId)
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("page/pageIndex", "1")
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
+    /**获取用户收藏列表
+     * @return
+     */
+    public String getUserFavorList(){
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/favorite_list")
+                .buildUpon()
+                .appendQueryParameter("type","0")
+                .appendQueryParameter("page/pageIndex", "1")
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
+    /**
+     * @param relation  获取关注列表
+     * @return
+     */
+    public String getFcousList(String relation){
+
+        String url= Uri.parse("https://www.oschina.net/action/action/openapi/friends_list")
+                .buildUpon()
+                .appendQueryParameter("page/pageIndex", "1")
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("relation", relation)
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+
+    }
+
+    /**
+     * @param relation  获取粉丝列表
+     * @return
+     */
+    public String getFanList(String relation){
+
+        String url= Uri.parse("https://www.oschina.net/action/action/openapi/friends_list")
+                .buildUpon()
+                .appendQueryParameter("page/pageIndex", "1")
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("relation", relation)
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+
+    }
+
+    /**
+     * @param userId  获取我的博客
+     * @return
+     */
+    public String getMyBlog(String userId ){
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/user_blog_list")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("authoruid", userId)
+                .appendQueryParameter("authorname", "false")
+                .appendQueryParameter("pageSize", "20")
+                .appendQueryParameter("page/pageIndex", "1")
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+
+    }
+
+
+    /**
+     * @param
+     * @return  msg发布动弹
+     */
     public String getPubTweetUrl(String msg){
         String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_pub")
                 .buildUpon()
