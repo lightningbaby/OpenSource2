@@ -45,7 +45,7 @@ public class AuthActivity extends AppCompatActivity{
         webSettings.setAllowContentAccess(true);
         webSettings.setAppCacheEnabled(false);
         webSettings.setBuiltInZoomControls(false);
-        webSettings.setUseWideViewPort(true);
+        //webSettings.setUseWideViewPort(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         auth();
