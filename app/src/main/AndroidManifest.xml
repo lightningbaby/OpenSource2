@@ -9,10 +9,11 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="OSChina"
+        android:name=".api_util.Api"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -33,7 +34,8 @@
 
         <activity android:name=".SerachResultActivity">
         </activity>
-
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".GuidePageActivity"/>
 
     </application>
 

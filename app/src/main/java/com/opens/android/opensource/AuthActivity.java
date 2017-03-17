@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -35,6 +37,11 @@ public class AuthActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /**全屏设置，隐藏窗口所有装饰**/
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        /**标题是属于View的，所以窗口所有的修饰部分被隐藏后标题依然有效,需要去掉标题**/
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_auth);
         init();
     }
@@ -115,6 +122,7 @@ public class AuthActivity extends AppCompatActivity{
             try {
                 jsonBody= new FetchJson((api.getAccessToken(mCode))).getUrlString();
                 String access_token=new ParseJson(jsonBody).paserAccessToken();
+
                 api.setAccessToken(access_token);
                 System.out.println("access-token-----get--------------------"+api.getAccessToken());
                 System.out.println("access-token-------------------------"+access_token);

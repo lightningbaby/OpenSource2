@@ -4,61 +4,85 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/list_item"
                 android:padding="5dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/today_image_view"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginLeft="5dp"
-        android:padding="5dp"
-        app:srcCompat="@drawable/today"/>
+
     <TextView
         android:id="@+id/title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/today_image_view"
+        android:layout_toRightOf="@+id/today_image_view"
+
         android:padding="2dp"
-        android:textSize="12dp"
-        android:layout_marginTop="3dp"/>
+        android:textSize="36dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        tools:text="永不"/>
     <TextView
         android:id="@+id/abstract_text_view"
         android:maxLines="2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/head"
+
         android:layout_below="@id/title_text_view"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+
         android:padding="1dp"
-        android:textSize="8dp"
+        android:textSize="16dp"
         />
-
-    <TextView
-        android:id="@+id/author_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@id/abstract_text_view"
-        android:padding="3dp"
-        android:textSize="10dp"
-        tools:text="发布者"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/date_text_view"
-        tools:text="发布时间"
-        android:layout_toRightOf="@id/author_text_view"
-        android:layout_below="@id/abstract_text_view"/>
 
     <TextView
         android:id="@+id/comment_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:textSize="8dp"
+
+        android:textSize="24dp"
         android:layout_below="@id/abstract_text_view"
         android:layout_alignParentRight="true"
         tools:text="评论"
         />
+
+    <ImageView
+        android:id="@+id/today_image_view"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:padding="5dp"
+        app:srcCompat="@drawable/today"
+        android:layout_alignTop="@+id/title_text_view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/date_text_view"
+        tools:text="发布时间"
+        android:textSize="24dp"
+        android:layout_alignBaseline="@+id/author_text_view"
+        android:layout_alignBottom="@+id/author_text_view"
+        android:layout_toRightOf="@+id/author_text_view"
+        android:layout_toEndOf="@+id/author_text_view"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_comment"
+        android:layout_below="@+id/abstract_text_view"
+        android:layout_toLeftOf="@+id/comment_text_view"
+        android:layout_toStartOf="@+id/comment_text_view"/>
+
+    <TextView
+        android:id="@+id/author_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:textSize="24dp"
+        tools:text="发布者"
+        android:layout_alignBottom="@+id/comment_text_view"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 </RelativeLayout>

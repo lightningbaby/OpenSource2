@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.opens.android.opensource.discover.DiscoverFragment;
 import com.opens.android.opensource.mine.MineFragment;
@@ -19,6 +21,11 @@ public class MainActivity extends AppCompatActivity implements ButtomBarFragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /**全屏设置，隐藏窗口所有装饰**/
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        /**标题是属于View的，所以窗口所有的修饰部分被隐藏后标题依然有效,需要去掉标题**/
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FragmentManager fm = getSupportFragmentManager();
@@ -59,5 +66,7 @@ public class MainActivity extends AppCompatActivity implements ButtomBarFragment
                 .commit();
         Log.v("onItemSelected",""+num);
     }
+
+
 
 }

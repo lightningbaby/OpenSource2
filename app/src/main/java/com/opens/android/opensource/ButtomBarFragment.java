@@ -13,7 +13,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.opens.android.opensource.api_util.WebViewActivity;
 import com.opens.android.opensource.tweet.Tweet;
@@ -32,6 +35,16 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
     private RelativeLayout tweet_layout;
     private RelativeLayout my_layout;
     private RelativeLayout add_layout;
+    private ImageView news_image;
+    private ImageView tweet_image;
+    private ImageView discover_image;
+    private ImageView my_image;
+
+    private TextView news_text;
+    private TextView tweet_text;
+    private TextView discover_text;
+    private TextView my_text;
+
 
     private  String TAG="ButtomBarFragment";
     private String SEARCH_KEY="SEARCH_KEY";
@@ -90,11 +103,24 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
         my_layout = (RelativeLayout) v.findViewById(R.id.my_layout);
         add_layout=(RelativeLayout)v.findViewById(R.id.add_layout);
 
+        news_image= (ImageView) v.findViewById(R.id.news_image);
+        tweet_image= (ImageView) v.findViewById(R.id.tweet_image);
+        discover_image = (ImageView) v.findViewById(R.id.discover_image);
+        my_image= (ImageView) v.findViewById(R.id.discover_image);
+
+        news_text= (TextView) v.findViewById(R.id.news_text);
+        tweet_text= (TextView) v.findViewById(R.id.tweet_text);
+        discover_text = (TextView) v.findViewById(R.id.discover_text);
+        my_text= (TextView) v.findViewById(R.id.my_text);
+
         news_layout.setOnClickListener(this);
         tweet_layout.setOnClickListener(this);
         discover_layout.setOnClickListener(this);
         my_layout.setOnClickListener(this);
         add_layout.setOnClickListener(this);
+
+
+
 
         return v;
     }
@@ -102,19 +128,28 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
 
         int position = 0;
+        clean();
         switch (view.getId())
 
         {
             case R.id.news_layout:
+                news_image.setImageResource(R.drawable.ic_nav_news_actived);
+                news_text.setTextColor(this.getResources().getColor(R.color.green_24cf5f));
                 position = 0;
                 break;
             case R.id.tweet_layout:
+                tweet_image.setImageResource(R.drawable.ic_nav_tweet_actived);
+                tweet_text.setTextColor(this.getResources().getColor(R.color.green_24cf5f));
                 position = 1;
                 break;
             case R.id.discover_layout:
+                discover_image.setImageResource(R.drawable.ic_nav_discover_actived);
+                discover_text.setTextColor(this.getResources().getColor(R.color.green_24cf5f));
                 position = 2;
                 break;
             case R.id.my_layout:
+                my_image.setImageResource(R.drawable.ic_nav_my_pressed);
+                my_text.setTextColor(this.getResources().getColor(R.color.green_24cf5f));
                 position = 3;
                 break;
             case R.id.add_layout:
@@ -127,7 +162,18 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
         mCallbacks.onItemSelected(position);
     }
 
+    public void clean(){
+        news_image.setImageResource(R.drawable.ic_nav_news_normal);
+        tweet_image.setImageResource(R.drawable.ic_nav_tweet_normal);
+        discover_image.setImageResource(R.drawable.ic_nav_discover_normal);
+        my_image.setImageResource(R.drawable.ic_nav_my_normal);
 
+        news_text.setTextColor(this.getResources().getColor(R.color.gray_2f2e35));
+        tweet_text.setTextColor(this.getResources().getColor(R.color.gray_2f2e35));
+        discover_text.setTextColor(this.getResources().getColor(R.color.gray_2f2e35));
+        my_text.setTextColor(this.getResources().getColor(R.color.gray_2f2e35));
+
+    }
 
 }
 

@@ -33,11 +33,15 @@ import android.widget.Toast;
 import com.opens.android.opensource.R;
 import com.opens.android.opensource.api_util.Api;
 import com.opens.android.opensource.api_util.FetchJson;
+import com.opens.android.opensource.api_util.PostPic;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -50,7 +54,7 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
     public EditText tweetContent;
     private GridView mGridView;
     private final int IMAGE_OPEN = 1;
-    private String pathImage;
+    public static String pathImage;
     private Bitmap bmp;
     private ArrayList<HashMap<String, Object>> imageItem;
     private SimpleAdapter simpleAdapter;
@@ -59,6 +63,18 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
     private LinearLayout AddPicOption;
     private TextView addpic;
     private final String TWEET_PUB="tweet pub";
+    private static final String TAG="Image";
+    private static Bitmap addbmp;
+
+
+    public static String getPathImage() {
+        return pathImage;
+    }
+
+    public static void setPathImage(String pathImage) {
+        AddTweetActivity.pathImage = pathImage;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -125,6 +141,7 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
             }
         });
     }
+
     protected void dialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(AddTweetActivity.this);
         builder.setMessage("确认移除已添加图片吗？");
@@ -164,8 +181,9 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
                 }
 
                 cursor.moveToFirst();
-                pathImage = cursor.getString(cursor
-                        .getColumnIndex(MediaStore.Images.Media.DATA));
+//                ----------------------------------------------------------
+                 this.setPathImage(cursor.getString(cursor
+                         .getColumnIndex(MediaStore.Images.Media.DATA)));
             }
         }
     }
@@ -173,7 +191,7 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
     protected void onResume() {
         super.onResume();
         if(!TextUtils.isEmpty(pathImage)){
-            Bitmap addbmp=BitmapFactory.decodeFile(pathImage);
+             addbmp=BitmapFactory.decodeFile(pathImage);
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("itemImage", addbmp);
             imageItem.add(map);
@@ -196,7 +214,7 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
             mGridView.setAdapter(simpleAdapter);
             simpleAdapter.notifyDataSetChanged();
 
-            pathImage = null;
+//            pathImage = null;
         }
     }
     @Override
@@ -214,8 +232,12 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
                 //Toast.makeText(this,"消息内容："+str,Toast.LENGTH_SHORT);
                 AddTweetActivity.this.finish();
                 //new TweetFetch().fetchaddItems(str);
-//                调用后台发动弹
-                new pubMsg().execute(str);
+//                调用后台发动弹------------------------------------------------
+                new pubMsg().execute(str);//str 是要发送的动弹内容
+
+//                PostPic postPic=new PostPic();
+//                postPic.sendImage(str);
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -226,11 +248,37 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
     private class pubMsg extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... strings) {
+//            //获取图片
+//            byte[] img=null;
+//
+//            if(getPathImage()!=null){
+//                try {
+//                    InputStream inputStream=new FileInputStream(getPathImage());
+//                    img=new byte[inputStream.available()];
+//                    inputStream.read(img);
+//                    inputStream.close();
+//                    Log.d(TAG,"byte[]---------------------------------"+img.toString());
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+
             Api api=new Api();
             System.out.println("Image Activity  accesstoken-------------------"+api.getAccessToken());
             JSONObject jsonBody=new JSONObject();
+
             try {
-                jsonBody= new FetchJson((api.getPubTweetUrl(strings[0]))).getUrlString();
+//                if (addbmp == null) {//如果没图片
+                    jsonBody= new FetchJson((api.getPubTweetUrl(strings[0]))).getUrlString();
+//                }
+//                else{//有图片
+//                    PostPic postPic=new PostPic();
+//                    postPic.sendImage(strings[0]);
+//                    jsonBody= new FetchJson((api.getPubTweetWithPicUrl(strings[0],img))).getUrlString();
+//                }
+
                 System.out.println("jsonbody===================================================="+jsonBody.toString());
                 Log.d(TWEET_PUB,jsonBody.toString());
             } catch (IOException e) {
@@ -240,6 +288,12 @@ public class AddTweetActivity extends AppCompatActivity implements View.OnClickL
             }
             return jsonBody.toString();
         }
+
+//        @Override
+//        protected void onPostExecute(String s) {
+//            super.onPostExecute(s);
+//            AddTweetActivity.this.finish();
+//        }
     }
 
     @Override

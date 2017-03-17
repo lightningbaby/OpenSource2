@@ -1,5 +1,6 @@
 package com.opens.android.opensource.api_util;
 
+import android.app.Application;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
@@ -7,10 +8,10 @@ import android.net.Uri;
  * Created by ttc on 2017/3/13.
  */
 
-public class Api {
+public class Api extends Application{
     private static final String TAG = "Api";
-    public static final String APP_ID= "xyE3FtbFZ9VekutWaFWn";
-    public static final String APP_SCERET= "ldxzijw5P1gR3yohBcpYfXgIo8bpWild";
+    public static final String APP_ID= "jKYCq0LSizEqF58OQAP9";
+    public static final String APP_SCERET= "GPFsngGVc3wwokSXcjj6nxjZJCuYpNho";
     public static final String GRANT_TYPE="authorization_code";
     public static final String CALL_BACK_URL= "https://my.oschina.net/lightningbaby";
     public static  String ACCESS_TOKEN;
@@ -154,14 +155,27 @@ public class Api {
 
     /**
      * @param
-     * @return  msg发布动弹
+     * @return  msg发布动弹 有图片
+     */
+    public String getPubTweetWithPicUrl(String msg,byte[] img){
+        String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_pub")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("msg", msg)
+                .appendQueryParameter("image", img.toString())
+                .build().toString();
+        return url;
+    }
+    /**
+     * @param
+     * @return  msg发布动弹 无图片
      */
     public String getPubTweetUrl(String msg){
         String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_pub")
                 .buildUpon()
                 .appendQueryParameter("access_token",ACCESS_TOKEN)
                 .appendQueryParameter("msg", msg)
-//                .appendQueryParameter("image", image.toString())
+//                .appendQueryParameter("image", img.toString())
                 .build().toString();
         return url;
     }
