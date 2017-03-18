@@ -106,7 +106,7 @@ public class ButtomBarFragment extends Fragment implements View.OnClickListener 
         news_image= (ImageView) v.findViewById(R.id.news_image);
         tweet_image= (ImageView) v.findViewById(R.id.tweet_image);
         discover_image = (ImageView) v.findViewById(R.id.discover_image);
-        my_image= (ImageView) v.findViewById(R.id.discover_image);
+        my_image= (ImageView) v.findViewById(R.id.my_image);
 
         news_text= (TextView) v.findViewById(R.id.news_text);
         tweet_text= (TextView) v.findViewById(R.id.tweet_text);
