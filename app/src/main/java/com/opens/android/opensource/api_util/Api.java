@@ -10,8 +10,8 @@ import android.net.Uri;
 
 public class Api extends Application{
     private static final String TAG = "Api";
-    public static final String APP_ID= "sY49QWR4dSKL53tyHnS3";
-    public static final String APP_SCERET= "Ryn8r6UtZtvjwARLYPcVBQZHh5KM0KL4";
+    public static final String APP_ID= "38mgDtd49UVKry6MUyhD";
+    public static final String APP_SCERET= "I1PLX8mbksqU7mCRgpGtpidKyo9GUaoc";
     public static final String GRANT_TYPE="authorization_code";
     public static final String CALL_BACK_URL= "https://my.oschina.net/u/2962802";
     public static String ACCESS_TOKEN;
@@ -373,6 +373,15 @@ public class Api extends Application{
                 .build().toString();
         return url;
     }
+    public String getMyInformation( ){
 
+        String url= Uri.parse("https://www.oschina.net/action/openapi/my_information")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+
+    }
 
 }

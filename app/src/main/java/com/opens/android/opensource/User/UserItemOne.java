@@ -22,6 +22,7 @@ import com.opens.android.opensource.fetchsource.ThumbnailDownloader;
 import com.opens.android.opensource.sum.Sum;
 import com.opens.android.opensource.tweet.Tweet;
 import com.opens.android.opensource.user_model.User;
+import com.opens.android.opensource.view.ProgressHUD;
 
 import org.json.JSONException;
 
@@ -38,18 +39,23 @@ import static android.content.ContentValues.TAG;
 public class UserItemOne {
     private RecyclerView mRecyclerView;
     private Context mContext;
+    public ProgressHUD mProgressHUD;
     private Fragment mFragment;
     private static String mString;
     private List<Tweet> mTweetItems = new ArrayList<>();
     private List<User> mUserItems = new ArrayList<>();
     private List<Sum> mBlogItems = new ArrayList<>();
     private ThumbnailDownloader<ItemHolder> mThumbnailDownloader;
+    public void showMyDialog( boolean isCancelable,int i) {
+        mProgressHUD = ProgressHUD.show(mContext, "加载中...", true, isCancelable, null,i);
+    }
     public UserItemOne(RecyclerView recyclerView, Context context, Fragment fragment, String str){
         mRecyclerView=recyclerView;
         mContext=context;
         mFragment=fragment;
         mString=str;
         System.out.println("-----------------------------Item get string"+mString);
+        showMyDialog(true,0);
         switch (mString){
             case "40":
                 new FetchTweetTask().execute();
@@ -145,6 +151,7 @@ public class UserItemOne {
     private class FetchTweetTask extends AsyncTask<Void,Void,List<Tweet>> {
         @Override
         protected List<Tweet> doInBackground(Void... voids) {
+            //showMyDialog(true);
             JudgeType judgeType=new JudgeType(mString);
             List<Tweet>  item= new ArrayList<>();
             try {
@@ -164,6 +171,8 @@ public class UserItemOne {
         protected void onPostExecute(List<Tweet> items) {
             mTweetItems = items;
             setupAdapter();
+            mProgressHUD.cancel();
+
         }
     }
     private class FetchUserTask extends AsyncTask<Void,Void,List<User>> {
@@ -188,6 +197,7 @@ public class UserItemOne {
         protected void onPostExecute(List<User> items) {
             mUserItems = items;
             setupAdapter();
+            mProgressHUD.cancel();
         }
     }
     private class FetchBlogTask extends AsyncTask<Void,Void,List<Sum>> {
@@ -212,6 +222,7 @@ public class UserItemOne {
         protected void onPostExecute(List<Sum> items) {
             mBlogItems = items;
             setupAdapter();
+            mProgressHUD.cancel();
         }
     }
     public void onDestroy() {
