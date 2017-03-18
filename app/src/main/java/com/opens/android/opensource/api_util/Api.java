@@ -1,8 +1,8 @@
 package com.opens.android.opensource.api_util;
 
 import android.app.Application;
+import android.graphics.Bitmap;
 import android.net.Uri;
-
 
 /**
  * Created by ttc on 2017/3/13.
@@ -161,33 +161,30 @@ public class Api extends Application{
 
     }
 
-    /**
-     *
-     *  获取我的信息
-     * @return
-     */
-    public String getMyInformation( ){
-
-        String url= Uri.parse("https://www.oschina.net/action/openapi/my_information")
-                .buildUpon()
-                .appendQueryParameter("access_token",ACCESS_TOKEN)
-                .appendQueryParameter("dataType", "json")
-                .build().toString();
-        return url;
-
-    }
-
 
     /**
      * @param
-     * @return  msg发布动弹
+     * @return  msg发布动弹 有图片
+     */
+    public String getPubTweetWithPicUrl(String msg,byte[] img){
+        String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_pub")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("msg", msg)
+                .appendQueryParameter("image", img.toString())
+                .build().toString();
+        return url;
+    }
+    /**
+     * @param
+     * @return  msg发布动弹 无图片
      */
     public String getPubTweetUrl(String msg){
         String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_pub")
                 .buildUpon()
                 .appendQueryParameter("access_token",ACCESS_TOKEN)
                 .appendQueryParameter("msg", msg)
-//                .appendQueryParameter("image", image.toString())
+//                .appendQueryParameter("image", img.toString())
                 .build().toString();
         return url;
     }
@@ -262,7 +259,7 @@ public class Api extends Application{
         return url;
     }
 
-    public String getTechQADetail(String tweetId){
+    public String getTechQADetail(String  tweetId){
     String url= Uri.parse("https://www.oschina.net/action/openapi/post_detail")
             .buildUpon()
             .appendQueryParameter("id", tweetId)
