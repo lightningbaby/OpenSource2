@@ -41,6 +41,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
     private TextView MyFollowingText;
     private TextView MyFansText;
     private TextView MyUsrName;
+
     //private ThumbnailDownloader mThumbnailDownloader;
     private ImageView MyPortrait;
     private Context mContext;
@@ -69,6 +70,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         MyFans.setOnClickListener(this);
         MyMessage.setOnClickListener(this);
         MyBlog.setOnClickListener(this);
+
         loading();
 //
 //        //      mTextView=(TextView)v.findViewById(R.id.text1);
@@ -98,6 +100,7 @@ public class MineFragment extends Fragment implements View.OnClickListener{
         MyFansText.setText(user.getFansCount());
         MyUsrName.setText(user.getUserName());
         //MyPortrait.setImageBitmap(bitmap);
+        MyPortrait.setImageResource(R.drawable.default_portrait);
 
     }
 

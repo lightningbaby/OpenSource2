@@ -52,7 +52,7 @@ public class WelcomeActivity extends Activity {
         SharedPreferences shared = getSharedPreferences("activity_welcome", MODE_PRIVATE);
         play = shared.getBoolean("play", true);
 
-        play=true;
+        play=false;
         //如果有记录的话则直接进入MainActivity
         if (!play) {
             hander.sendEmptyMessageDelayed(WELCOME, TIME);
@@ -68,7 +68,7 @@ public class WelcomeActivity extends Activity {
 
     //程序启动直接通过欢迎页进入主程序
     private void goWelcome() {
-        Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
+        Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
         startActivity(i);
         finish();
 
