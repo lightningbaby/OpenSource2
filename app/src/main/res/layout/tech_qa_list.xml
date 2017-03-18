@@ -7,42 +7,61 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/author_portrait_image_view"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginLeft="5dp"
-        android:padding="5dp"
-        app:srcCompat="@drawable/today"/>
-
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/author_portrait_image_view">
-
-        <TextView
-            android:id="@+id/title_text_view"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/author_portrait_image_view"
-            android:padding="2dp"
-            android:textSize="36sp"
-            android:layout_marginTop="3dp"
-            tools:text="test "/>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tech_qa_body_text_view"
-            android:maxLines="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_text_view"
-            android:padding="1dp"
-            android:textSize="8dp"
-            />
 
+            <ImageView
+                android:id="@+id/author_portrait_image_view"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="5dp"
+                android:padding="5dp"
+                app:srcCompat="@drawable/today"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/author_portrait_image_view"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/title_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/author_portrait_image_view"
+                    android:padding="2dp"
+                    android:textSize="18dp"
+                    android:layout_marginTop="3dp"
+                    tools:text="test "
+                    android:textStyle="normal|bold"/>
+
+                <TextView
+                    android:id="@+id/tech_qa_body_text_view"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title_text_view"
+                    android:padding="1dp"
+                    android:textSize="16dp"
+                    />
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:id="@+id/body_linear_layout"
@@ -51,21 +70,23 @@
 
             <TextView
                 android:id="@+id/author_text_view"
-                android:layout_width="64dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="12dp"
                 tools:text="发布者"
                 android:layout_below="@id/tech_qa_body_text_view"
+                android:layout_weight="1"
                 />
 
             <TextView
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/date_text_view"
                 tools:text="发布时间"
-                android:textSize="18dp"
+                android:textSize="12dp"
                 android:layout_toRightOf="@id/author_text_view"
                 android:layout_below="@id/tech_qa_body_text_view"
+                android:layout_weight="2"
                 />
 
 
@@ -73,28 +94,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_comment"
-
                 android:id="@+id/imageView"
-                android:layout_weight="0.01"/>
+                android:layout_weight="0.5"
+                />
 
             <TextView
                 android:id="@+id/comment_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:textSize="18dp"
-                android:layout_below="@id/tech_qa_body_text_view"
-                android:layout_alignParentRight="true"
-                tools:text="评论"
+                android:textSize="12dp"
+                android:layout_weight="0.5"
                 />
 
         </LinearLayout>
 
+        <View
+            android:layout_marginTop="4dp"
+            android:layout_height="1px"
+            android:background="@color/gray_line"
+            android:layout_width="match_parent"
+            android:layout_below="@id/comment_text_view"/>
+
     </LinearLayout>
-    <View
-        android:layout_height="1px"
-        android:background="@color/gray_line"
-        android:layout_width="match_parent"
-        android:layout_below="@id/body_linear_layout"/>
+
 
 </RelativeLayout>
