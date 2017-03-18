@@ -20,7 +20,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
 
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/author_portrait_image_view">
 
         <TextView
@@ -45,6 +45,7 @@
 
         <LinearLayout
             android:orientation="horizontal"
+            android:id="@+id/body_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -74,7 +75,7 @@
                 app:srcCompat="@drawable/ic_comment"
 
                 android:id="@+id/imageView"
-                android:layout_weight="0.05"/>
+                android:layout_weight="0.01"/>
 
             <TextView
                 android:id="@+id/comment_text_view"
@@ -90,5 +91,10 @@
         </LinearLayout>
 
     </LinearLayout>
+    <View
+        android:layout_height="1px"
+        android:background="@color/gray_line"
+        android:layout_width="match_parent"
+        android:layout_below="@id/body_linear_layout"/>
 
 </RelativeLayout>

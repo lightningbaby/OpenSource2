@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements ButtomBarFragment
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         /**标题是属于View的，所以窗口所有的修饰部分被隐藏后标题依然有效,需要去掉标题**/
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FragmentManager fm = getSupportFragmentManager();
@@ -67,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements ButtomBarFragment
         Log.v("onItemSelected",""+num);
     }
 
-
-
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        unbindService();
+//    }
 }

@@ -8,7 +8,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_oschina"
         android:label="OSChina"
         android:name=".api_util.Api"
         android:supportsRtl="true"

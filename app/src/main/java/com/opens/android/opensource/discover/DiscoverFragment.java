@@ -49,7 +49,7 @@ public class DiscoverFragment  extends Fragment{
     class MenuAdapter extends BaseAdapter
     {
         String[] names = new String[]
-                { "软件分类", "推荐", "最新", "热门", "国产" };
+                { "软件分类", " 推荐软件", " 最新软件", " 热门软件", " 国产软件" };
 
         @Override
         public List<String> getMenuItems()

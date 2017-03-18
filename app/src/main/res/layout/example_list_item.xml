@@ -4,54 +4,99 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/list_item"
                 android:padding="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-<ImageView
-    android:id="@+id/head"
-    android:layout_width="45dp"
-    android:layout_height="45dp"
-    android:layout_marginLeft="5dp"
-    android:padding="5dp"
-    app:srcCompat="@drawable/head1"/>
-    <TextView
-        android:id="@+id/usr_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/head"
-        android:padding="2dp"
-        android:textSize="12dp"
-        tools:text="用户ID"
-        android:layout_marginTop="3dp"/>
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/head"
-        android:layout_below="@id/usr_id"
-        android:padding="1dp"
-        android:textSize="8dp"
-        tools:text="时间"
-        />
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@id/head"
-        android:padding="3dp"
-        android:maxLines="1"
-        android:textSize="10dp"
-        tools:text="标题"
-        />
 
-    <TextView
-        android:id="@+id/comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="8dp"
-        android:layout_below="@id/title"
-        android:layout_alignParentRight="true"
-        tools:text="评论"
-        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/head"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
+            app:srcCompat="@drawable/head1"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/usr_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/head"
+                android:padding="2dp"
+                android:textSize="12dp"
+                tools:text="用户ID"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:textStyle="normal|bold"/>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/head"
+                android:padding="3dp"
+                android:maxLines="1"
+                android:textSize="12dp"
+                tools:text="标题"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/head"
+                    android:layout_below="@id/usr_id"
+                    android:padding="1dp"
+                    android:textSize="8dp"
+                    tools:text="时间"
+                    android:layout_weight="0.10"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_comment"
+                    android:layout_below="@+id/abstract_text_view"
+                    android:layout_toLeftOf="@+id/comment_text_view"
+                    android:layout_toStartOf="@+id/comment_text_view"/>
+
+                <TextView
+                    android:id="@+id/comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:textSize="8dp"
+                    android:layout_below="@id/title"
+                    android:layout_alignParentRight="true"
+                    tools:text="评论"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_height="1px"
+        android:background="@color/gray_line"
+        android:layout_width="match_parent"/>
+
 </RelativeLayout>

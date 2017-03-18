@@ -47,7 +47,7 @@ public class SumFragment extends Fragment {
 
     class MenuAdapter extends BaseAdapter{
         String[] names = new String[]
-                { "  开源资讯  ", "  推荐博客  ", "  技术问答  ", "  职业生涯  " };
+                { "  开源资讯   ", "   推荐博客  ", "   技术问答  ", "   职业生涯  " };
 
         @Override
         public List<String> getMenuItems() {

@@ -10,8 +10,8 @@ import android.net.Uri;
 
 public class Api extends Application{
     private static final String TAG = "Api";
-    public static final String APP_ID= "jKYCq0LSizEqF58OQAP9";
-    public static final String APP_SCERET= "GPFsngGVc3wwokSXcjj6nxjZJCuYpNho";
+    public static final String APP_ID= "0JtJQlAh8mSI8GvmFuMV";
+    public static final String APP_SCERET= "t8oi13UgKtAzgftrWotLMJZwjIXDwBgr";
     public static final String GRANT_TYPE="authorization_code";
     public static final String CALL_BACK_URL= "https://my.oschina.net/lightningbaby";
     public static  String ACCESS_TOKEN;
