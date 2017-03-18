@@ -2,35 +2,22 @@ package com.opens.android.opensource.sum;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
-import com.jude.rollviewpager.hintview.IconHintView;
-import com.jude.rollviewpager.hintview.TextHintView;
 import com.opens.android.opensource.R;
 import com.opens.android.opensource.api_util.JudgeType;
 import com.opens.android.opensource.api_util.WebViewActivity;
-import com.opens.android.opensource.fetchsource.ThumbnailDownloader;
-
-
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,52 +27,34 @@ import java.util.List;
  */
 
 public class SumItem {
-    //    private String EXTRA_CRIME_ID ="EXTRA_CRIME_ID";
-//    private String EXTRA_CRIME_IDENTIFY ="EXTRA_CRIME_IDENTIFY";
-    private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";
+    private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";//用于向webView传递url
 
     private RecyclerView mPhotoRecyclerView;
     private static final String TAG="SumItem";
     private List<Sum> mItems = new ArrayList<>();
-    private ThumbnailDownloader<SumItem.PhotoHolder> mPhotoHolderThumbnailDownloader;
     private Context mContext;
     private Fragment mFragment;
     private String bigType;//决定是综合中的哪一块
+
 
     public SumItem(RecyclerView mRcycle, Context context, Fragment fragment,String str) {
         mPhotoRecyclerView=mRcycle;
         mContext=context;
         mFragment=fragment;
         bigType=str;
-
         new FetchItemsTask().execute();
-
-
-        Handler responseHandler=new Handler();
-        mPhotoHolderThumbnailDownloader=new ThumbnailDownloader<>(responseHandler);
-        mPhotoHolderThumbnailDownloader.setThumbnailDownloadListener(
-                new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
-                    @Override
-                    public void onThumbnailDownloaded(PhotoHolder photoHolder, Bitmap thumbnail) {
-                        Drawable drawable=new BitmapDrawable(mFragment.getResources(),thumbnail);
-//                        photoHolder.bindDrawable(drawable);//因为没有图片
-                    }
-                }
-        );
-        mPhotoHolderThumbnailDownloader.start();
-        mPhotoHolderThumbnailDownloader.getLooper();
-        Log.i(TAG,"Background thread started");
-
-        mPhotoRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-       //setupAdapter();
     }
 
-    public void Destroy() {
-        mPhotoHolderThumbnailDownloader.clearQueue();
-        mPhotoHolderThumbnailDownloader.quit();
-        Log.i(TAG,"Backeground thread destroyed");
-    }
+//    public void Destroy() {
+//        mPhotoHolderThumbnailDownloader.clearQueue();
+//        mPhotoHolderThumbnailDownloader.quit();
+//        Log.i(TAG,"Backeground thread destroyed");
+//    }
 
+
+    /**
+     *后台任务、下载数据
+     */
     private class FetchItemsTask extends AsyncTask<Void,Void,List<Sum>> {
         @Override
         protected List<Sum> doInBackground(Void... voids) {
@@ -137,12 +106,9 @@ public class SumItem {
             mImagej=(ImageView)itemView.findViewById(R.id.today_image_view);
             mImagey=(ImageView)itemView.findViewById(R.id.yuan);
             view=(View)itemView.findViewById(R.id.view_id);
-
         }
 
-        public void bindDrawable(Drawable drawable) {
-//          mTweetPortraitImageView.setImageDrawable(drawable);
-        }
+
         public void bindSumOthers(Sum sum){
             mSum=sum;
             mTitleTextView.setText(sum.getSumTitle().toString());
@@ -185,17 +151,10 @@ public class SumItem {
 
         @Override
         public void onClick(View v) {
-//            Toast.makeText(mContext,
-//                    mTweet.getTweetId() + " clicked!", Toast.LENGTH_SHORT)
-//                    .show();
-
             Intent intent = new Intent(mContext, WebViewActivity.class);
-//            intent.putExtra(EXTRA_CRIME_ID, mSoftware.getName());
-//            intent.putExtra(EXTRA_CRIME_IDENTIFY, "31");
             intent.putExtra(EXTRA_CRIME_URL,mSum.getSumDetailUrl());
             mContext.startActivity(intent);
         }
-
     }
 
     private class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder>{
@@ -214,15 +173,11 @@ public class SumItem {
 
         @Override
         public void onBindViewHolder(PhotoHolder holder, int position) {
-//           Sum sum=mSumList.get(position);
-////            String url="https://static.oschina.net/uploads/user/0/1_50.jpg?t=1389148177000";
-////            mPhotoHolderThumbnailDownloader.queueThumbanail(holder,url);
-//           holder.bindSumOthers(sum);
             if(position==0 ){
-                holder.bindCycleView();
+                holder.bindCycleView();//如果是第一个位置，就为它绑定 cycleViewPager
             }else{
                 Sum sum=mSumList.get(position);
-                holder.bindSumOthers(sum);
+                holder.bindSumOthers(sum); // 其它位置，正常绑定数据
             }
         }
 
@@ -239,6 +194,8 @@ public class SumItem {
     }
 
     private class TestNormalAdapter extends StaticPagerAdapter {
+
+        //推荐博客 轮播图片
         private int[] imgs = {
                 R.drawable.bg_topic_12,
                 R.drawable.bg_topic_22,
@@ -246,6 +203,8 @@ public class SumItem {
                 R.drawable.bg_topic_42,
                 R.drawable.bg_topic_52
         };
+
+        //开源资讯 轮播图片
         private int[] imgs1 = {
                 R.drawable.bg_topic_11,
                 R.drawable.bg_topic_21,
@@ -258,6 +217,8 @@ public class SumItem {
         @Override
         public View getView(ViewGroup container, int position) {
             ImageView view = new ImageView(container.getContext());
+
+            // "00"表示 开源资讯
             if(bigType.equals("00")){
                 view.setImageResource(imgs1[position]);
             }

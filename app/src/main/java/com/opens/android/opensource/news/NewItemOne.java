@@ -152,11 +152,11 @@ public class NewItemOne {
 //            Toast.makeText(mContext,
 //                    mTweet.getTweetId() + " clicked!", Toast.LENGTH_SHORT)
 //                    .show();
-
 //            Intent intent = new Intent(mContext, WebViewActivity.class);
 //            intent.putExtra(EXTRA_CRIME_ID, mTweet.getTweetId());
 //            intent.putExtra(EXTRA_CRIME_IDENTIFY, "10");
 //            mContext.startActivity(intent);
+
         }
     }
 

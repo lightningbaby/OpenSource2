@@ -37,7 +37,8 @@ import java.util.List;
 
 public class TechQAItem{
 
-    ///!!!!!!!!!!Tweet Tweet
+    private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";////用于向webView传递url
+
     private RecyclerView mPhotoRecyclerView;
     private static final String TAG="TechQAItem";
     private List<Tweet> mItems = new ArrayList<>();
@@ -45,9 +46,7 @@ public class TechQAItem{
     private Context mContext;
     private Fragment mFragment;
     private String bigType;//决定是综合中技术问答还是职业生涯
-    //    private String EXTRA_CRIME_ID ="EXTRA_CRIME_ID";
-//    private String EXTRA_CRIME_IDENTIFY ="EXTRA_CRIME_IDENTIFY";
-    private String EXTRA_CRIME_URL ="EXTRA_CRIME_URL";
+
 
 
 
@@ -61,6 +60,7 @@ public class TechQAItem{
         new FetchItemsTask().execute();
 
 
+        //消息循环读取图片
         Handler responseHandler=new Handler();
         mPhotoHolderThumbnailDownloader=new ThumbnailDownloader<>(responseHandler);
         mPhotoHolderThumbnailDownloader.setThumbnailDownloadListener(
@@ -68,10 +68,13 @@ public class TechQAItem{
                     @Override
                     public void onThumbnailDownloaded(PhotoHolder photoHolder, Bitmap thumbnail) {
                         Drawable drawable=new BitmapDrawable(mFragment.getResources(),thumbnail);
-                        photoHolder.bindDrawable(drawable);//因为没有图片
+                        photoHolder.bindDrawable(drawable);
                     }
                 }
         );
+
+
+        //开始消息循环
         mPhotoHolderThumbnailDownloader.start();
         mPhotoHolderThumbnailDownloader.getLooper();
         Log.i(TAG,"Background thread started");

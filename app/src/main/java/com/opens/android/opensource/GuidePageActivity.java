@@ -50,7 +50,7 @@ public class GuidePageActivity extends Activity implements ViewPager.OnPageChang
         LayoutInflater inflate = LayoutInflater.from(GuidePageActivity.this);
         views = new ArrayList<View>();
         views.add(inflate.inflate(R.layout.guide_first, null));
-        views.add(inflate.inflate(R.layout.guide_second, null));
+       // views.add(inflate.inflate(R.layout.guide_second, null));
         vad = new VpageAdapter(views, this);
         vp = (ViewPager) findViewById(R.id.viewpager);
         vp.setAdapter(vad);

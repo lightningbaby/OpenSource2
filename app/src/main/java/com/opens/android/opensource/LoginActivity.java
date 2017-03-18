@@ -13,7 +13,6 @@ import android.widget.EditText;
  * Created by ttc on 2017/3/14.
  */
 
-//public class LoginActivity extends AppCompatActivity implements View.OnClickListener,TextWatcher{
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
         private Button mLoginButton;
     private EditText mUserName;
