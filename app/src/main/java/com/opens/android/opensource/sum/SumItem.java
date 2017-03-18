@@ -120,6 +120,10 @@ public class SumItem {
         private ImageView mImageView;
         private Sum mSum;
         private RollPagerView mRollViewPager;
+        private ImageView mImagej;
+        private ImageView mImagey;
+        private View view ;
+
 
         public PhotoHolder(View itemView) {
             super(itemView);
@@ -130,6 +134,9 @@ public class SumItem {
             mCommentTextView= (TextView) itemView.findViewById(R.id.comment_text_view);
             mRollViewPager= (RollPagerView) itemView.findViewById(R.id.roll_view_pager);
             mImageView=(ImageView)itemView.findViewById(R.id.pinglun);
+            mImagej=(ImageView)itemView.findViewById(R.id.today_image_view);
+            mImagey=(ImageView)itemView.findViewById(R.id.yuan);
+            view=(View)itemView.findViewById(R.id.view_id);
 
         }
 
@@ -153,6 +160,9 @@ public class SumItem {
             mCommentTextView.setVisibility(View.GONE);
             mAbstractTextView.setVisibility(View.GONE);
             mImageView.setVisibility(View.GONE);
+            mImagej.setVisibility(View.GONE);
+            mImagey.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
 
             //设置播放时间间隔
             mRollViewPager.setPlayDelay(1000);
@@ -230,11 +240,11 @@ public class SumItem {
 
     private class TestNormalAdapter extends StaticPagerAdapter {
         private int[] imgs = {
-                R.drawable.bg_topic_1,
-                R.drawable.bg_topic_2,
-                R.drawable.bg_topic_3,
-                R.drawable.bg_topic_4,
-                R.drawable.bg_topic_5
+                R.drawable.bg_topic_12,
+                R.drawable.bg_topic_22,
+                R.drawable.bg_topic_32,
+                R.drawable.bg_topic_42,
+                R.drawable.bg_topic_52
         };
         private int[] imgs1 = {
                 R.drawable.bg_topic_11,
