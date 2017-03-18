@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/head"
                     android:padding="2dp"
-                    android:textSize="20dp"
+                    android:textSize="12dp"
                     tools:text="用户ID"
                     android:layout_marginTop="3dp"
                     android:layout_weight="1"
@@ -57,7 +57,7 @@
                     android:layout_below="@id/head"
                     android:padding="3dp"
                     android:maxLines="1"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     tools:text="标题"
                     android:layout_weight="1"/>
 
