@@ -21,6 +21,8 @@ import android.widget.TextView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
+import com.jude.rollviewpager.hintview.IconHintView;
+import com.jude.rollviewpager.hintview.TextHintView;
 import com.opens.android.opensource.R;
 import com.opens.android.opensource.api_util.JudgeType;
 import com.opens.android.opensource.api_util.WebViewActivity;
@@ -127,6 +129,8 @@ public class SumItem {
             mDateTextView= (TextView) itemView.findViewById(R.id.date_text_view);
             mCommentTextView= (TextView) itemView.findViewById(R.id.comment_text_view);
             mRollViewPager= (RollPagerView) itemView.findViewById(R.id.roll_view_pager);
+            mImageView=(ImageView)itemView.findViewById(R.id.pinglun);
+
         }
 
         public void bindDrawable(Drawable drawable) {
@@ -148,6 +152,7 @@ public class SumItem {
             mDateTextView.setVisibility(View.GONE);
             mCommentTextView.setVisibility(View.GONE);
             mAbstractTextView.setVisibility(View.GONE);
+            mImageView.setVisibility(View.GONE);
 
             //设置播放时间间隔
             mRollViewPager.setPlayDelay(1000);
@@ -161,10 +166,10 @@ public class SumItem {
             //设置圆点指示器颜色
             //设置文字指示器
             //隐藏指示器
-            //mRollViewPager.setHintView(new IconHintView(this, R.drawable.point_focus, R.drawable.point_normal));
+           // mRollViewPager.setHintView(new IconHintView(this, R.drawable.point_focus, R.drawable.point_normal));
             mRollViewPager.setHintView(new ColorPointHintView(mContext, Color.YELLOW,Color.WHITE));
-            //mRollViewPager.setHintView(new TextHintView(this));
-            //mRollViewPager.setHintView(null);
+            //mRollViewPager.setHintView(new TextHintView(mContext));
+           // mRollViewPager.setHintView("*****************");
 
         }
 
