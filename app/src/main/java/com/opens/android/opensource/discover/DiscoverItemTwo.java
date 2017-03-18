@@ -81,6 +81,7 @@ public class DiscoverItemTwo {
         protected void onPostExecute(List<Software> items) {
             mItems = items;
             setupAdapter();
+
         }
     }
 
