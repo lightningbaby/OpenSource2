@@ -8,6 +8,12 @@
                 android:layout_marginRight="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+    <com.jude.rollviewpager.RollPagerView
+        android:id="@+id/roll_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:visibility="gone"
+        app:rollviewpager_play_delay="3000"/>
 
     <TextView
         android:id="@+id/title_text_view"
