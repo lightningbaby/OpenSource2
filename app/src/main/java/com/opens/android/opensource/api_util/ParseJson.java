@@ -5,6 +5,7 @@ import android.text.Html;
 import com.opens.android.opensource.discover.Software;
 import com.opens.android.opensource.sum.Sum;
 import com.opens.android.opensource.tweet.Tweet;
+import com.opens.android.opensource.user_model.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,7 +14,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,6 +139,27 @@ public class ParseJson {
         }
         return sumList;
     }
+    //我的博客
+    public List<Sum> parseMyBlog() throws JSONException {
+
+        List<Sum> sumList=new ArrayList<>();
+        JSONArray newsJsonArray =getJsonBody().getJSONArray("projectlist");
+
+        for (int i=0;i<newsJsonArray.length();i++){
+            JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);
+            Sum sum=new Sum();
+            sum.setSumAuthorName(newsJsonObject.getString("author"));
+            sum.setSumId(newsJsonObject.getString("id"));
+            sum.setSumTitle(newsJsonObject.getString("title"));
+            sum.setSumType(newsJsonObject.getString("type"));
+            sum.setSumAuthorId(newsJsonObject.getString("authorid"));
+            sum.setSumPubDate(newsJsonObject.getString("pubDate"));
+            sum.setSumCommentCount(newsJsonObject.getString("commentCount"));
+            sumList.add(sum);
+        }
+        return sumList;
+    }
+
     public Sum parseRecBlogBody(Sum sum) throws JSONException {
 //        Document document=  Jsoup.parse(getJsonBody().getString("body"));//parse的参数是要解析的字符串或网页啥的，比如 <p>hello</p><p>world</p><t>baga</t>
 //        Elements elements=  document.getElementsByTag("/n");//根据标签解析 存储所有符合条件的东东,比如解析得到集合<p>hello</p><p>world</p>
@@ -258,25 +279,56 @@ public class ParseJson {
      * @return
      * @throws JSONException  收藏 关注 粉丝
      */
-    public List<Tweet> parseFavorList() throws JSONException {
+    public List<User> parseFavorList() throws JSONException {
 
-        List<Tweet> tweetList=new ArrayList<>();
-        JSONArray newsJsonArray =getJsonBody().getJSONArray("favoriteList");
+        List<User> userList=new ArrayList<>();
+        JSONArray newsJsonArray =getJsonBody().getJSONArray("userList");
 
         for (int i=0;i<newsJsonArray.length();i++){
             JSONObject newsJsonObject=newsJsonArray.getJSONObject(i);
-            Tweet tweet=new Tweet();
-            tweet.setTweetTitle(newsJsonObject.getString("title"));
-            tweet.setTweetId(newsJsonObject.getString("id"));//对应 favorite中的objid
-            tweet.setAuthorId(newsJsonObject.getString("type"));
-            tweet.setTweetDetailUrl(newsJsonObject.getString("url"));
+            User user=new User();
+            user.setUserGender(newsJsonObject.getString("gender"));
+            user.setUserName(newsJsonObject.getString("name"));//对应 favorite中的objid
+            user.setUserPortrait(newsJsonObject.getString("portrait"));
+            user.setUserExpertise(newsJsonObject.getString("expertise"));
+            user.setUserId(newsJsonObject.getString("userid"));
 
 
-            tweetList.add(tweet);
+            userList.add(user);
         }
-        return tweetList;
+        return userList;
+    }
+//获取当前用户信息
+    public User parseUserInfo() throws JSONException {
+
+        //JSONObject jsonObject=new JSONObject();
+        User user=new User();
+        user.setUserId(jsonBody.getString("id"));
+        user.setUserEmail(jsonBody.getString("email"));
+        user.setUserName(jsonBody.getString("name"));
+//        user.setUserGender(jsonBody.getString("gender"));
+        user.setUserAvatar(jsonBody.getString("avatar"));
+//        user.setUserLocation(jsonBody.getString("location"));
+
+        return user;
     }
 
+    /**
+     * 获取我的信息
+     * @return
+     * @throws JSONException
+     */
+    public User parseMyInformation() throws JSONException {
 
-
+        User user=new User();
+        user.setUserId(jsonBody.getString("uid"));
+        user.setUserName(jsonBody.getString("name"));
+        user.setUserGender(jsonBody.getString("gender"));
+        user.setFansCount(jsonBody.getString("fansCount"));
+        user.setFollowersCount(jsonBody.getString("followersCount"));
+        user.setFavoriteCount(jsonBody.getString("favoriteCount"));
+        user.setUserPortrait(jsonBody.getString("portrait"));
+//        user.setUserLocation(jsonBody.getString("location"));
+        return user;
+    }
 }

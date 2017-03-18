@@ -4,15 +4,13 @@ import android.util.Log;
 
 import com.opens.android.opensource.sum.Sum;
 import com.opens.android.opensource.tweet.Tweet;
+import com.opens.android.opensource.user_model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.id.list;
 
 /**
  * Created by ttc on 2017/3/13.
@@ -30,8 +28,29 @@ public class JudgeType {
     private final String MY_TWEET="MY_TWEET";//12
 
 
-    private final  String KIND_SOFTWARE ="KIND_SOFTWARE" ;//30
+    private final String KIND_SOFTWARE ="KIND_SOFTWARE" ;//30
     private final String ITEM_SOFTWARE="ITEM_SOFTWARE";// 31 32  33 34
+
+    private final String MY_FAVORITE="MY_FAVORITE";
+    private final String MY_FOLLOWING="MY_FOLLOWING";
+    private final String MY_FANS="MY_FANS";
+    private final String MY_MESSAGE="MY_MESSAGE";
+    private final String MY_BLOG="MY_BLOG";
+    private static User theUser;
+
+    public User getUser() {
+        return theUser;
+    }
+
+    public User setUser(User user) throws IOException, JSONException {
+        Api api=new Api();
+        JSONObject json=new FetchJson(api.getUserInfo()).getUrlString();
+        user=new ParseJson(json).parseUserInfo();
+        return user;
+
+    }
+
+
 
 
     private String Type;
@@ -53,10 +72,13 @@ public class JudgeType {
      */
     public List<?> JudgeAndRet() throws IOException, JSONException {
         Api api=new Api();
+
+
         if(api.getAccessToken()==null){
             System.out.println("access token is null++++++++++++++++++++++++++++++++++++++++++++");
         }
         JSONObject jsonBody=new JSONObject();
+
 //        List<Tweet> mTweets = new ArrayList<>();
 //        List<Sum> sumList=new ArrayList<>();
 
@@ -111,6 +133,35 @@ public class JudgeType {
                 jsonBody=new FetchJson(api.getSoftwareListApi(getType())).getUrlString();
                 return new ParseJson(jsonBody).parseItemSoftwares();
 
+
+            case "40":
+                Log.d(MY_TWEET,"my tweet");
+                User current=setUser(new User());
+                String userId=current.getUserId();
+                System.out.println(userId);
+                jsonBody=new FetchJson(api.getUserTweet(userId)).getUrlString();
+                return new ParseJson(jsonBody).parseTweets();
+            case "41":
+                Log.d(MY_FAVORITE,"my favorite");
+                jsonBody=new FetchJson(api.getUserFavorList()).getUrlString();
+                return new ParseJson(jsonBody).parseFavorList();
+            case "42":
+                Log.d(MY_FOLLOWING,"my following");
+//                String str=api.getFcousList("1");
+//                String str1=api.getFcousList("0");
+                jsonBody=new FetchJson(api.getFcousList("1")).getUrlString();
+                return new ParseJson(jsonBody).parseFavorList();
+            case "43":
+                Log.d(MY_FANS,"my fans");
+                jsonBody=new FetchJson(api.getFanList("0")).getUrlString();
+                return new ParseJson(jsonBody).parseFavorList();
+            case "44":
+                Log.d(MY_MESSAGE,"my message");
+                //暂无
+            case "45":
+                Log.d(MY_BLOG,"my blog");
+                jsonBody=new FetchJson(api.getMyBlog(setUser(new User()).getUserId())).getUrlString();
+                return new ParseJson(jsonBody).parseMyBlog();
         }
         return null;
     }
@@ -153,6 +204,19 @@ public class JudgeType {
         }
         return  tweetList;
     }
+    public User JudgeAndRetUser() throws IOException, JSONException {
+        Api api=new Api();
 
+
+        if(api.getAccessToken()==null){
+            System.out.println("access token is null++++++++++++++++++++++++++++++++++++++++++++");
+        }
+        JSONObject jsonBody=new JSONObject();
+
+                Log.d("MY","my");
+                jsonBody=new FetchJson(api.getMyInformation()).getUrlString();
+                User u=new ParseJson(jsonBody).parseMyInformation();
+                return u;
+    }
 }
 

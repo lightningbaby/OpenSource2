@@ -24,6 +24,9 @@ public class User {
     private String mUserFanCount;
     private String mUserFavorCount;
     private String mUserFollowCount;
+    private String fansCount;
+    private String favoriteCount;
+    private String followersCount;
 
     public User() {
     }
@@ -179,4 +182,29 @@ public class User {
     public void setUserFollowCount(String userFollowCount) {
         mUserFollowCount = userFollowCount;
     }
+
+    public String getFansCount() {
+        return fansCount;
+    }
+
+    public void setFansCount(String fansCount) {
+        this.fansCount = fansCount;
+    }
+
+    public String getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public void setFavoriteCount(String favoriteCount) {
+        this.favoriteCount = favoriteCount;
+    }
+
+    public String getFollowersCount() {
+        return followersCount;
+    }
+
+    public void setFollowersCount(String followersCount) {
+        this.followersCount = followersCount;
+    }
 }
+

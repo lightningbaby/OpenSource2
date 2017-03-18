@@ -1,8 +1,8 @@
 package com.opens.android.opensource.api_util;
 
 import android.app.Application;
-import android.graphics.Bitmap;
 import android.net.Uri;
+
 
 /**
  * Created by ttc on 2017/3/13.
@@ -10,11 +10,11 @@ import android.net.Uri;
 
 public class Api extends Application{
     private static final String TAG = "Api";
-    public static final String APP_ID= "0JtJQlAh8mSI8GvmFuMV";
-    public static final String APP_SCERET= "t8oi13UgKtAzgftrWotLMJZwjIXDwBgr";
+    public static final String APP_ID= "sY49QWR4dSKL53tyHnS3";
+    public static final String APP_SCERET= "Ryn8r6UtZtvjwARLYPcVBQZHh5KM0KL4";
     public static final String GRANT_TYPE="authorization_code";
-    public static final String CALL_BACK_URL= "https://my.oschina.net/lightningbaby";
-    public static  String ACCESS_TOKEN;
+    public static final String CALL_BACK_URL= "https://my.oschina.net/u/2962802";
+    public static String ACCESS_TOKEN;
 
 //    private String accessToken;
 
@@ -64,6 +64,15 @@ public class Api extends Application{
     }
 //个人信息
 
+    public String getUserInfo(){
+        String url= Uri.parse("https://www.oschina.net/action/openapi/user")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+    }
+
     /**
      * @param userId 获取用户发布过的动弹列表
      * @return
@@ -103,7 +112,7 @@ public class Api extends Application{
      */
     public String getFcousList(String relation){
 
-        String url= Uri.parse("https://www.oschina.net/action/action/openapi/friends_list")
+        String url= Uri.parse("https://www.oschina.net/action/openapi/friends_list")
                 .buildUpon()
                 .appendQueryParameter("page/pageIndex", "1")
                 .appendQueryParameter("pageSize", "20")
@@ -121,7 +130,7 @@ public class Api extends Application{
      */
     public String getFanList(String relation){
 
-        String url= Uri.parse("https://www.oschina.net/action/action/openapi/friends_list")
+        String url= Uri.parse("https://www.oschina.net/action/openapi/friends_list")
                 .buildUpon()
                 .appendQueryParameter("page/pageIndex", "1")
                 .appendQueryParameter("pageSize", "20")
@@ -152,30 +161,33 @@ public class Api extends Application{
 
     }
 
+    /**
+     *
+     *  获取我的信息
+     * @return
+     */
+    public String getMyInformation( ){
+
+        String url= Uri.parse("https://www.oschina.net/action/openapi/my_information")
+                .buildUpon()
+                .appendQueryParameter("access_token",ACCESS_TOKEN)
+                .appendQueryParameter("dataType", "json")
+                .build().toString();
+        return url;
+
+    }
+
 
     /**
      * @param
-     * @return  msg发布动弹 有图片
-     */
-    public String getPubTweetWithPicUrl(String msg,byte[] img){
-        String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_pub")
-                .buildUpon()
-                .appendQueryParameter("access_token",ACCESS_TOKEN)
-                .appendQueryParameter("msg", msg)
-                .appendQueryParameter("image", img.toString())
-                .build().toString();
-        return url;
-    }
-    /**
-     * @param
-     * @return  msg发布动弹 无图片
+     * @return  msg发布动弹
      */
     public String getPubTweetUrl(String msg){
         String url= Uri.parse("https://www.oschina.net/action/openapi/tweet_pub")
                 .buildUpon()
                 .appendQueryParameter("access_token",ACCESS_TOKEN)
                 .appendQueryParameter("msg", msg)
-//                .appendQueryParameter("image", img.toString())
+//                .appendQueryParameter("image", image.toString())
                 .build().toString();
         return url;
     }
@@ -250,7 +262,7 @@ public class Api extends Application{
         return url;
     }
 
-    public String getTechQADetail(String  tweetId){
+    public String getTechQADetail(String tweetId){
     String url= Uri.parse("https://www.oschina.net/action/openapi/post_detail")
             .buildUpon()
             .appendQueryParameter("id", tweetId)

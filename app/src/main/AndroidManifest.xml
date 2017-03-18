@@ -20,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".User.UserListActivity"
+                  android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".tweet.AddTweetActivity"
                   android:label="发布动弹"
                   android:parentActivityName=".MainActivity"></activity>
